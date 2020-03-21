@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Proposta classificazione</title>
+    <link rel="stylesheet" type="text/css" href="css/Propostaclassificazione.css">
+
+
+  </head>
+  <body>
+
+    <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
+
+    <div id="contenitore">
+      <h1>Proposta classificazione: </h1><br>
+      <form class="" action="" method="post">
+        <label>Data: </label> <input type="date" name="data"><br>
+        <label>Codice avvistamento: </label><br>
+        <select class="avvistamenti" name="avvistamenti">
+          <!-- lista degli avvistamenti presenti nel database con qualche dato inserito di specifica, non solo codice-->
+          <option></option>
+        </select><br>
+        <label>Commento:</label><br>
+        <textarea name="Commento" rows="8" cols="80" maxlength="50"></textarea><br>
+        <label>Nome latino: </label><br>
+        <input type="text" name="Nome" placeholder="Marsilea quadrifolia"><br><br>
+
+
+        <input type="submit" value="Invia">
+      </form>
+      </div>
+
+  </body>
+</html>

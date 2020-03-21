@@ -1,0 +1,109 @@
+* {box-sizing: border-box;}
+body, html{
+  height: 110%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body{
+  background-image: url(https://www.nicepng.com/png/detail/46-468209_tall-grass-nature-transparent-background-grass-png.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+/* Style the sidebar - fixed full height */
+.sidebar {
+  height: 100%;
+  width: 230px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #4CAF50;
+  opacity: 0.7;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+/* Style sidebar links */
+.sidebar a, input[type="text"] {
+  padding: 5px 5px 5px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  display: block;
+}
+
+/* Style links on mouse-over */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Style the main content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+
+h1{
+  text-align: center;
+  font-family: "Verdana", sans-serif;
+  font-style: italic;
+
+
+}
+
+
+.profilo{
+  height: 100%;
+}
+#btnlogout{
+  margin-left: 5px;
+  margin-top: 5px;
+}
+img{
+  float: left;
+}
+
+table, th, td {
+  padding: 5px;
+  background-color: white;
+}
+table {
+  border-spacing: 15px;
+  margin-left: 100px;
+  border-radius: 10px;
+}
+
+td{
+  font-family: Arial, sans-serif;
+}
+
+.menu{
+  float: right;
+}
+input[type="search"]{
+  margin-left: 10px;
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  width: 70%;
+  display: inline-block;
+}
+input[type="submit"]{
+  border-radius: 5px;
+  height: 55%;
+  width: 20%;
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: inline-block;
+
+
+
+
+}

@@ -1,0 +1,138 @@
+*{
+  box-sizing: border-box;
+  overflow: hidden;
+
+
+}
+body{
+  width: 100%;
+  margin: 0;
+}
+
+
+
+.col1{
+  background-image: url(https://ilnuovoterraglio.it/wp-content/uploads/2018/10/riccio-1300x848.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  overflow: hidden;
+  height: 800px;
+  float: left;
+  width: 33.33%;
+  background-color: transparent;
+  border: 1px solid black;
+  text-align: center;
+
+}
+
+.col2{
+    background-image: url(https://filecdn.nonsprecare.it/wp-content/uploads/2016/10/come-coltivare-tulipani-3.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    overflow: hidden;
+    height: 800px;
+    float: left;
+    width: 33.33%;
+    background-color: transparent;
+    border: 1px solid black;
+    text-align: center;
+
+
+}
+.col3{
+    background-image: url(https://blog.zingarate.com/castelgandolfo/wp-content/uploads/2017/09/lago-di-albano-trekking-1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    overflow: hidden;
+    height: 800px;
+    float: left;
+    width: 33.33%;
+    background-color: transparent;
+    border: 1px solid black;
+    text-align: center;
+
+
+}
+
+
+
+.contenitore1{
+  position: fixed;
+   width: 350px;
+   height: 400px;
+   z-index: 20;
+   top: 40%;
+   left: 15%;
+   margin: -130px 0 0 -170px;
+
+    background-color: lightgrey;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+select{
+  width: 80%;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.contenitore input[type="submit"]{
+  margin-top: 10px;
+  width: 30%;
+}
+
+label{
+  font-family: "Arial", sans-serif;
+
+}
+
+.contenitore2{
+  position: fixed;
+   width: 350px;
+   height: 400px;
+   z-index: 20;
+   top: 40%;
+   left: 50%;
+   margin: -130px 0 0 -170px;
+
+    background-color: lightgrey;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+.contenitore3{
+  position: fixed;
+   width: 350px;
+   height: 400px;
+   z-index: 20;
+   top: 40%;
+   left: 83%;
+   margin: -130px 0 0 -170px;
+
+    background-color: lightgrey;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.col1 input[type="button"]{
+  margin-left: 10px;
+}
+
+.top{
+  z-index: 40;
+  text-align: left;
+
+
+}

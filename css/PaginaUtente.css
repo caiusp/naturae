@@ -1,0 +1,169 @@
+body, html{
+  height: 100%
+  margin: 0;
+  overflow: hidden;
+}
+
+#bg {
+  background-image: url(carsharing.jpg);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+
+input[type="button"]{
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+#profilo{
+  background-color: white;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 90%;
+  margin-top: 10px;
+
+}
+
+#profilo h1{
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  font-family: sans-serif;
+  font-style: oblique;
+  font-size: 25px;
+  text-decoration: underline;
+}
+
+
+img{
+    width:300px;
+    height: 200px;
+    background:yellow;
+    position:absolute;
+    left:50%;
+    margin-left:-150px;
+    display: block;
+}
+
+#contenitoreDati{
+  border: 4px solid black;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 500px;
+  height: 260px;
+  margin-top: 210px;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 5px;
+}
+
+#dati label{
+  padding: 40px;
+  line-height: 20px;
+  font-style: oblique;
+
+}
+
+#dati{
+  width: 400px;
+  height: 300px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 5px;
+
+}
+
+#prenotazione{
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+  width: 30%;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 14px;
+  clear: both;
+  display: inline-block;
+
+}
+
+#prenotazione h1{
+  font-family: sans-serif;
+  font-style: oblique;
+  text-decoration: underline;
+  text-align: center;
+  font-size: 20px;
+
+}
+
+.prenotazioneVeicolo label{
+  font-style: italic;
+  font-size: 15px;
+}
+
+.prenotazioneVeicolo input{
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
+  padding: 10px 10px;
+  border-radius: 5px;
+
+}
+
+#prenotazione button{
+  float: right;
+  margin-top: 2px;
+  margin-right: 2px;
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+#cercaUtente{
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+  width: 30%;
+  height: 40%;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 14px;
+  clear: both;
+  display: inline-block;
+
+}
+
+#cercaUtente h2{
+  font-family: sans-serif;
+  font-style: oblique;
+  text-decoration: underline;
+  text-align: center;
+  font-size: 20px;
+}
+
+.cerca label{
+  font-style: italic;
+  font-size: 15px;
+}
+
+.cerca input{
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
