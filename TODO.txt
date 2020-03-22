@@ -1,2 +1,2 @@
 TO DO:
-
+_in messaggio se si inserisce come destinatario un utente non esistente, viene eseguito il comando stampando a video "ANDATA" ma non viene scritto sul db 
