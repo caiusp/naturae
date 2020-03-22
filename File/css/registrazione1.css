@@ -6,11 +6,7 @@ body{
 
 }
 
-h1{
-  font-size: 20px;
-  font-family: Arial;
-  color: black;
-}
+
 body, html{
   height: 100%;
   margin: 0;
@@ -29,14 +25,18 @@ h1{
 }
 
 #contenitore{
-  position: relative;
-  margin: auto;
-  width: 40%;
-  background-color: lightgrey;
-  border: 2px solid black;
-  border-radius: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  position: absolute;
+   width: 500px;
+   height: 500px;
+   z-index: 15;
+   top: 40%;
+   left: 50%;
+   margin: -200px 0 0 -270px;
+    background-color: lightgrey;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 input[value="Torna alla home"]{
   background: white;
@@ -45,7 +45,7 @@ input[value="Torna alla home"]{
 input{
   border-radius: 5px;
 }
-input[type=text], input[type="password"], input[type="email"], input[type="date"], input[name="works"]{
+input[type=text], input[type="password"], input[type="email"], input[type="date"], input[name="works"], input[type="number"]{
   width: 100%;
   margin: 8px 0;
   box-sizing: border-box;

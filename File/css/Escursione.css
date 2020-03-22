@@ -25,35 +25,52 @@ body, html{
 #contenitore{
   position: absolute;
    width: 400px;
-   height: 650px;
+   height: 550px;
    z-index: 15;
    top: 40%;
    left: 50%;
-   margin: -260px 0 0 -170px;
+   margin: -210px 0 0 -170px;
 
     background-color: lightgrey;
     border: 2px solid black;
     border-radius: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 10px;
 }
 
 input{
   border-radius: 5px;
 }
+
+#partenza{
+  padding-left: 10px;
+}
+
 input[type=text], input[type="number"], textarea{
   width: 100%;
   margin: 8px 0;
   box-sizing: border-box;
   padding: 8px 8px;
-
 }
+
 input[type="submit"]{
   width:100px;
   margin: 0 auto;
   display: block;
   margin-bottom: 20px;
 }
+input[type="date"]{
+  width: 70px;
+}
+#arrivo{
+  padding-left: 10px;
+
+}
+
 label{
   font-family: "Arial", sans-serif;
+}
+textarea{
+  resize: none;
 }

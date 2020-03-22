@@ -84,8 +84,8 @@ select{
 }
 
 .contenitore input[type="submit"]{
-  margin-top: 10px;
-  width: 30%;
+  margin-top: 15px;
+  width: 40%;
 }
 
 label{
