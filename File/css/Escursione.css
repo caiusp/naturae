@@ -71,3 +71,6 @@ input[type="date"]{
 label{
   font-family: "Arial", sans-serif;
 }
+textarea{
+  resize: none;
+}
