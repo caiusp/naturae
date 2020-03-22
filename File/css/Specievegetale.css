@@ -47,3 +47,12 @@ input[type="submit"]{
   display: block;
   margin-bottom: 20px;
 }
+#inserimento{
+  position: fixed;
+  width: 20%;
+
+}
+#inserimento input[type="submit"]{
+  padding-right: 10px;
+}
+
