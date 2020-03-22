@@ -23,6 +23,20 @@
        transform:translateX(-50%) translateY(-50%);
        z-index:0
        }
+	#Registrazione{
+             font-family: "Times New Roman";
+	     font-size: 15px;
+	     font-stretch: expanded;
+	   }
+
+	     a[href="File/PaginaRegistrazione.php"]{
+             font-family: "Times New Roman";
+             padding-left: 5px;
+             text-decoration: underline;
+             color: white;
+
+           }
+
 
        @media (pointer:coarse) and (hover:none){
          body{background:url(../img/img.png) #002e66 no-repeat center center scroll;
@@ -38,20 +52,7 @@
              border-radius: 5px;
            }
 
-           #Registrazione{
-             font-family: "Times New Roman";
-	     font-size: 15px;
-	     font-stretch: expanded;
-	   }
-
-	     a[href="File/PaginaRegistrazione.php"]{
-             font-family: "Times New Roman";
-             padding-left: 5px;
-             text-decoration: underline;
-             color: white;
-
-           }
-
+           
 
              .masthead{
                position:relative;
