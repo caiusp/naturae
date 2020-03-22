@@ -13,20 +13,20 @@
 
     <div id="contenitore">
       <h1>Proposta classificazione: </h1><br>
-      <form class="" action="" method="post">
+      <form class="" action="PropostaClassificazione.php" method="post">
         <label>Data: </label> <input type="date" name="data"><br>
         <label>Codice avvistamento: </label><br>
-        <select class="avvistamenti" name="avvistamenti">
+        <select class="avvistamenti" name="avvistamento">
           <!-- lista degli avvistamenti presenti nel database con qualche dato inserito di specifica, non solo codice-->
           <option></option>
         </select><br>
         <label>Commento:</label><br>
-        <textarea name="Commento" rows="8" cols="80" maxlength="50"></textarea><br>
+        <textarea name="commento" rows="8" cols="80" maxlength="50"></textarea><br>
         <label>Nome latino: </label><br>
-        <input type="text" name="Nome" placeholder="Marsilea quadrifolia"><br><br>
+        <input type="text" name="nomeLatino" placeholder="Marsilea quadrifolia"><br><br>
 
 
-        <input type="submit" value="Invia">
+        <input type="submit" name="send_proposta" value="Invia">
       </form>
       </div>
 
