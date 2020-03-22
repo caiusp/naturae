@@ -65,3 +65,6 @@ input[type="number"]{
 label[for="note"]{
   padding-top: 15px;
 }
+textarea{
+  resize: none;
+}
