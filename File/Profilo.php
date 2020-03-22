@@ -64,15 +64,15 @@ if(isset($_SESSION['nome'])) {
     <table id="info">
       <tr>
         <td rowspan="10"><img src="https://www.alacbrindisi.it/wp-content/uploads/2019/10/icona-dell-utente-di-vettore-7337510.jpg" alt="profiloImmagine" width="300" height="300"></td>
+      </tr>
+      <tr>
         <td><label for="nome">Nickname: </label></td>
         <td colspan="2"><?php echo $_SESSION['nome']; ?> </td>
-        <td></td>
       </tr>
 
       <tr>
         <td><label for="email">Email: </label></td>
         <td colspan="2"><?php echo $_SESSION['email']; ?> </td>
-        <td></td>
 
       </tr>
       <tr>
@@ -88,6 +88,22 @@ if(isset($_SESSION['nome'])) {
         <td colspan="2"><?php echo $_SESSION['tipoUtente']; ?></td>
       </tr>
       <tr>
+        <td></td>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td><label for="classificazione"></label></td>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td><label for="classificazione"></label></td>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td><label for="classificazione"></label></td>
+        <td colspan="2"></td>
+
+      </tr>
 
   </table>
 
@@ -106,12 +122,13 @@ if(isset($_SESSION['nome'])) {
 
   <a href="Messaggio.html"><i class="fa fa-fw fa-envelope"></i> Invia messaggio</a>
   <a href="Avvistamento.html"><i class="fa fa-binoculars"></i> Avvistamento</a>
-  <a href=""><i class="fa fa-fw fa-sort"></i> Classifica</a>
-  <a href=""><i class="fa fa-fw fa-flag"></i> Iscrizione escursione</a>
+  <a href="Classificamenuaffidabilità.html"><i class="fa fa-fw fa-sort"></i> Classifica</a>
+  <a href="Iscrizioneescursione.html"><i class="fa fa-fw fa-flag"></i> Iscrizione escursione</a>
   <a href="Effettuadonazione.html"><i class="fa fa-money"></i> Effettua donazione</a>
   <a href="Propostaclassificazione.html"><i class="fa fa-fw fa-bullhorn"></i> Proposta classificazione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti premium</b> </center></label><hr>
+  <a href="Premiumclassifica.html"><i class="fa fa-user-circle-o"></i> La tua classifica</a>
   <a href="Escursione.html"><i class="fa fa-fw fa-trophy"></i>Crea escursione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti amministratori</b> </center></label><hr>
@@ -120,7 +137,7 @@ if(isset($_SESSION['nome'])) {
   <a href="Paginahabitat.html"><i class="fa fa-snowflake-o"></i>  Nuovo habitat</a>
   <a href="Modificaspecieveg.html"><i class="fa fa-tree"></i> Modifica scheda vegetale</a>
   <a href="Modificaspeciean.html"><i class="fa fa-linux"></i> Modifica scheda animale</a>
-  <a href=""><i class="fa fa-fw fa-flag"></i>Modifica scheda habitat</a>
+  <a href="Modificaschedahabitat.html"><i class="fa fa-fw fa-flag"></i>Modifica scheda habitat</a>
   <a href=""><i class="fa fa-arrow-up"></i> Modifica classificazione</a>
   <a href="Campagna.html"><i class="fa fa-fw fa-trophy"></i>Apri campagna</a>
   <a href="Rimuovischeda.html"><i class="fa fa-trash"></i> Elimina scheda</a><br>
