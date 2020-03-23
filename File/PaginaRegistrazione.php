@@ -36,10 +36,10 @@
         <input type="email" name="email" placeholder="mariorossi@gmail.com" required>
         <br>
         <label>Password: </label> <br>
-        <input type="password" name="password" pattern=".{0,8}" placeholder="" required>
+        <input type="password" name="password" placeholder="" required>
         <br><br>
         <label>Foto: </label>
-        <input type="file" name="foto"><br>
+        <input type="file" name="foto" accept="image/jpeg, image/x-png"><br>
 
 
         <input type="submit" name="reg_user" value="Invia" >
