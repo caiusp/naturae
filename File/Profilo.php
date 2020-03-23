@@ -121,7 +121,7 @@ if(isset($_SESSION['nome'])) {
 
 
   <a href="Messaggio.html"><i class="fa fa-fw fa-envelope"></i> Invia messaggio</a>
-  <a href="Avvistamento.html"><i class="fa fa-binoculars"></i> Avvistamento</a>
+  <a href="Avvistamento.php"><i class="fa fa-binoculars"></i> Avvistamento</a>
   <a href="Classificamenuaffidabilità.html"><i class="fa fa-fw fa-sort"></i> Classifica</a>
   <a href="Iscrizioneescursione.html"><i class="fa fa-fw fa-flag"></i> Iscrizione escursione</a>
   <a href="Effettuadonazione.html"><i class="fa fa-money"></i> Effettua donazione</a>
