@@ -18,11 +18,20 @@
         <input type="number" name="longitudine" placeholder="74.902334" required>
         <label>Foto:</label><input type="file" name="foto" required><br><br>
         <label>Habitat: </label>
-          <input type="text" name="habitat" required>
+      <?php
+      
+        $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
 
-        </select><br><br>
+        $result=mysqli_query($db,"SELECT nome FROM habitat");
+        echo "<select name='habitat'>";
+        while($riga=mysqli_fetch_array($result)){
+        echo "<option>".$riga["nome"]."</option>";
+        }
+        echo "</select>";
 
-        <input type="submit" name="send_avvistamento" value="Invia" onclick="location.href='Avvistamento.html'">
+      ?>  
+
+        <input type="submit" name="send_avvistamento" value="Invia"></a>
 
       </form>
       </div>
