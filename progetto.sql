@@ -176,6 +176,7 @@ CREATE TABLE PROPOSTACLASSIFICAZIONE(
 
 CREATE TABLE ISCRIZIONE(
     id INT AUTO_INCREMENT REFERENCES ESCURSIONE(nMaxPartecipanti) ON DELETE CASCADE,
+    id_Escursione INT REFERENCES ESCURSIONE(id),
     nomeUtente VARCHAR(20) REFERENCES UTENTE(nome) ON DELETE CASCADE,
     
     PRIMARY KEY(id, nomeUtente)
@@ -209,16 +210,7 @@ INSERT INTO UTENTEPREMIUM VALUES ("PREMIUM",null);
 INSERT INTO AVVISTAMENTO VALUES (null,"ADMIN","2020-01-01","1223","2344",null,"Laguna",null);
 INSERT INTO AVVISTAMENTO VALUES (null,"ADMIN","2020-01-01","45354","4422",null,"Lago",null);
 #INSERT INTO CAMPAGNAFONDI VALUES (null,null,"APERTO","5000","CORONAVIRUS","2020-01-01","ADMIN");
-#STORED PROCEDURE 9: creo nuovo avvistamento
-DELIMITER $
-CREATE PROCEDURE creaNuovoAvvistamento(IN nomeUtenteA VARCHAR(20),IN dataA DATE, IN latitudineA INT, IN longitudineA INT,IN fotoA BLOB, IN nomeHabitatA VARCHAR(20))
-BEGIN
-    START TRANSACTION;
-	INSERT INTO AVVISTAMENTO(nomeUtente,data,latitudine,longitudine,foto,nomeHabitat) VALUES (nomeUtenteA,dataA,latitudineA,longitudineA,fotoA,nomeHabitatA);
-    UPDATE UTENTE SET contatoreAvvistamentiEffettuati=contatoreAvvistamentiEffettuati+1;
-    COMMIT;
-END $
-DELIMITER ;
+
 #STORED PROCEDURES 1: creo una stored procedures da richiamare all'interno del trigger 1
 DELIMITER $
 CREATE PROCEDURE getSpecieMaggioranza()
@@ -236,6 +228,7 @@ BEGIN
 	having max(tot);
 END $
 DELIMITER ;
+
 #TRIGGER 1: Nel momento in cui si raggiungono almeno 5 proposte, ed
 #esiste una specie che ha ricevuto la maggioranza delle indicazioni di 
 #classificazione, si aggiunge un collegamento tra l'avvistamento e la specie
@@ -249,6 +242,7 @@ BEGIN
     END IF;
 END $
 DELIMITER ;
+
 #STOREDPROCEDURE 2: Salvo il nomeUtente che dev'essere promosso a premium
 DELIMITER $
 CREATE PROCEDURE getUtenteDaPromuovere()
@@ -256,6 +250,7 @@ BEGIN
 	SELECT nomeUtente FROM AVVISTAMENTO GROUP BY nomeUtente HAVING count(*)>=3;
 END $
 DELIMITER ;
+
 #TRIGGER 2: Un utente semplice viene promosso a utente premium
 #nel momento in cui inserisce almeno 3 segnalazioni
 DELIMITER $
@@ -263,13 +258,29 @@ CREATE TRIGGER aggiornaUtente
 AFTER INSERT ON AVVISTAMENTO
 FOR EACH ROW
 BEGIN
-	IF (SELECT nomeUtente FROM AVVISTAMENTO GROUP BY nomeUtente HAVING count(*)>=3 ) = AVVISTAMENTO.nomeUtente THEN
+  DECLARE cont SMALLINT;
+  DECLARE c CURSOR FOR SELECT count(*) FROM AVVISTAMENTO WHERE AVVISTAMENTO.nomeUtente=NEW.nomeUtente;
+  OPEN c;
+  FETCH c INTO cont;
+  CLOSE c;
+  IF(cont>2) THEN
+    UPDATE UTENTE SET tipoUtente="PREMIUM" WHERE ((UTENTE.nome=NEW.nomeUtente) AND (UTENTE.tipoUtente="SEMPLICE"));
+  END IF;
+END $
+DELIMITER ;
+/*
+DELIMITER $
+CREATE TRIGGER aggiornaUtente
+AFTER INSERT ON AVVISTAMENTO
+FOR EACH ROW
+BEGIN
+	IF ((SELECT nomeUtente FROM AVVISTAMENTO GROUP BY nomeUtente HAVING count(*)>=3 ) = AVVISTAMENTO.nomeUtente) THEN
 	INSERT INTO UTENTEPREMIUM(nome) VALUES(getUtenteDaPromuovere());
     UPDATE UTENTE SET tipoUtente="PREMIUM";
     DELETE FROM UTENTESEMPLICE WHERE UTENTESEMPLICE.nome=UTENTEPREMIUM.nome;
     END IF;
 END $
-DELIMITER ;
+DELIMITER ; */
 #TRIGGER 3: Chiude l'escursione appena si raggiunge il numero max
 #dei partecipanti
 DELIMITER $
@@ -361,12 +372,18 @@ BEGIN
     INSERT INTO UTENTEAMMINISTRATORE(nome) VALUES(nomeU);
 END $
 DELIMITER ;
-
+#STORED PROCEDURE 9: creo nuovo avvistamento
+DELIMITER $
+CREATE PROCEDURE creaNuovoAvvistamento(IN nomeUtenteA VARCHAR(20),IN dataA DATE, IN latitudineA INT, IN longitudineA INT,IN fotoA BLOB, IN nomeHabitatA VARCHAR(20))
+BEGIN
+	UPDATE UTENTE SET contatoreAvvistamentiEffettuati=contatoreAvvistamentiEffettuati+1 WHERE nome=nomeUtenteA;
+	INSERT INTO AVVISTAMENTO(nomeUtente,data,latitudine,longitudine,foto,nomeHabitat) VALUES (nomeUtenteA,dataA,latitudineA,longitudineA,fotoA,nomeHabitatA);
+END $
+DELIMITER ;
 #STORED PROCEDURE 10: creo nuova proposta
 DELIMITER $
 CREATE PROCEDURE creaNuovaProposta(IN codiceAvvistamentoP INT, IN dataP DATE, commentoP VARCHAR(50), nomeUtenteP VARCHAR(30), nomeLatinoP VARCHAR(30))
 BEGIN 
-	SET AUTOCOMMIT = 0;
     START TRANSACTION;
     INSERT INTO PROPOSTACLASSIFICAZIONE(codiceAvvistamento, data, commento, nomeUtente, nomeLatino) VALUES(codiceAvvistamentoP,dataP,commentoP,nomeUtenteP,nomeLatinoP);
     COMMIT;
@@ -377,7 +394,7 @@ DELIMITER $
 CREATE PROCEDURE creaNuovaEscursione(IN titoloE VARCHAR(20),IN nMaxPartecipantiE INT,IN descrizioneE VARCHAR(200),IN tragittoE VARCHAR(200),IN dataE DATE,IN orarioPartenzaE INT,IN orarioRitornoE INT,IN nomeCreatoreEscursioneE VARCHAR(20))
 BEGIN
     START TRANSACTION;
-    INSERT INTO ESCURSIONE(titolo,nMaxPartecipanti,descrizione,tragitto,data,stato,orarioPartenza,orarioRitorno,nomeCreatoreEscursione) VALUES(titoloE,nMaxPartecipantiE,descrizioneE,tragittoE,dataE,"APERTO",orarioPartenzaE,orarioRitornoE,nomeCreatoreEscursioneE);
+    INSERT INTO ESCURSIONE(titolo,nMaxPartecipanti,descrizione,tragitto,data,stato,partecipantiAttuali,orarioPartenza,orarioRitorno,nomeCreatoreEscursione) VALUES(titoloE,nMaxPartecipantiE,descrizioneE,tragittoE,dataE,"APERTO","",orarioPartenzaE,orarioRitornoE,nomeCreatoreEscursioneE);
     COMMIT;
 END $
 DELIMITER ;
@@ -441,7 +458,7 @@ DELIMITER $
 CREATE PROCEDURE iscrizioneEscursione(IN idE INT,IN nomeUtenteE VARCHAR(20))
 BEGIN
 	IF EXISTS(SELECT id FROM ESCURSIONE WHERE (ESCURSIONE.id=idE)AND(ESCURSIONE.stato="APERTO")) THEN
-		INSERT INTO ISCRIZIONE(nomeUtente)VALUES(nomeUtenteE);
+		INSERT INTO ISCRIZIONE(id_Escursione,nomeUtente)VALUES(idE,nomeUtenteE);
 	END IF;
 END $
 DELIMITER ;
@@ -456,10 +473,11 @@ END $
 DELIMITER ;
 #STORED PROCEDURE 20: aggiorna specie animale (ADMIN)
 DELIMITER $
-CREATE PROCEDURE aggiornaSpecieAnimale(IN nomeLatinoX VARCHAR(30),IN pesoX INT, IN altezzaX INT, IN proleMediaX INT)
+CREATE PROCEDURE aggiornaSpecieAnimale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoX VARCHAR(30),IN pesoX INT, IN altezzaX INT, IN proleMediaX INT)
 BEGIN 
 	IF EXISTS(SELECT nomeLatino FROM SPECIEANIMALE WHERE nomeLatino=nomeLatinoX) THEN
-		UPDATE SPECIEANIMALE SET peso=pesoX, altezza=altezzaX, proleMedia=proleMediaX;
+		UPDATE SPECIEANIMALE SET peso=pesoX, altezza=altezzaX, proleMedia=proleMediaX WHERE nomeLatino=nomeLatinoX;
+        INSERT INTO MODIFICASPECIE(timestamp, nomeLatinoSpecie, nomeAmministratore) VALUES (timestampS, nomeLatinoX, nomeAmministratoreS);
 	END IF;
 END $
 DELIMITER ;
@@ -480,18 +498,20 @@ END $
 DELIMITER ;
 #STORED PROCEDURE 22: nuova specie vegetale (ADMIN)
 DELIMITER $
-CREATE PROCEDURE nuovaSpecieVegetale(IN classeS VARCHAR(20),IN nomeLatinoS VARCHAR(30),IN nomeItalianoS VARCHAR(30),IN annoClassificazioneS INT,IN livelloVulnerabilitaS VARCHAR(20),IN linkWikipediaS VARCHAR(100),IN lunghezzaS INT,IN diametroS INT)
+CREATE PROCEDURE nuovaSpecieVegetale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoS VARCHAR(30),IN nomeItalianoS VARCHAR(30),IN classeS VARCHAR(20),IN linkWikipediaS VARCHAR(100),IN livelloVulnerabilitaS VARCHAR(20),IN annoClassificazioneS INT,IN lunghezzaS INT,IN diametroS INT)
 BEGIN
 	INSERT INTO SPECIE(classe, nomeLatino, nomeItaliano, annoClassificazione, livelloVulnerabilita, linkWikipedia) VALUES(classeS, nomeLatinoS, nomeItalianoS, annoClassificazioneS, livelloVulnerabilitaS, linkWikipediaS);
     INSERT INTO SPECIEVEGETALE(nomeLatino,lunghezza,diametro) VALUES(nomeLatinoS,lunghezzaS,diametroS);
+	INSERT INTO MODIFICASPECIE(timestamp, nomeLatinoSpecie, nomeAmministratore) VALUES (timestampS, nomeLatinoS, nomeAmministratoreS);
 END $
 DELIMITER ;
 #STORED PROCEDURE 23: aggiorna specie vegetale (ADMIN)
 DELIMITER $
-CREATE PROCEDURE aggiornaSpecieVegetale(IN nomeLatinoX VARCHAR(30),IN lunghezzaX INT, IN diametroX INT)
+CREATE PROCEDURE aggiornaSpecieVegetale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoX VARCHAR(30),IN lunghezzaX INT, IN diametroX INT)
 BEGIN 
 	IF EXISTS(SELECT nomeLatino FROM SPECIEVEGETALE WHERE nomeLatino=nomeLatinoX) THEN
-		UPDATE SPECIEANIMALE SET lunghezza=lunghezzaX, diametro=diametroX;
+		UPDATE SPECIEVEGETALE SET lunghezza=lunghezzaX, diametro=diametroX WHERE nomeLatino=nomeLatinoX;
+        INSERT INTO MODIFICASPECIE(timestamp, nomeLatinoSpecie, nomeAmministratore) VALUES (timestampS, nomeLatinoX, nomeAmministratoreS);
 	END IF;
 END $
 DELIMITER ;
@@ -510,17 +530,19 @@ END $
 DELIMITER ;
 #STORED PROCEDURE 25: nuovo habitat (ADMIN)
 DELIMITER $
-CREATE PROCEDURE nuovoHabitat(IN nomeH VARCHAR(30), IN descrizioneH VARCHAR(100))
+CREATE PROCEDURE nuovoHabitat(IN timestampH timestamp, IN nomeAmministratoreH VARCHAR(200), IN nomeH VARCHAR(30), IN descrizioneH VARCHAR(100))
 BEGIN
 	INSERT INTO HABITAT(nome,descrizione) VALUES(nomeH,descrizioneH);
+    INSERT INTO MODIFICAHABITAT(timestamp, nomeHabitat, nomeAmministratore) VALUES (timestampH, nomeH, nomeAmministratoreH);
 END $
 DELIMITER ;
 #STORED PROCEDURE 26: aggiorna habitat (ADMIN)
 DELIMITER $
-CREATE PROCEDURE aggiornaHabitat(IN nomeH VARCHAR(30), IN descrizioneH VARCHAR(100))
+CREATE PROCEDURE aggiornaHabitat(IN timestampH timestamp, IN nomeAmministratoreH VARCHAR(200),IN nomeH VARCHAR(30), IN descrizioneH VARCHAR(100))
 BEGIN
 	IF EXISTS(SELECT nome FROM HABITAT WHERE nome=nomeH) THEN
-		UPDATE HABITAT SET descrizione=descrizioneH;
+		UPDATE HABITAT SET descrizione=descrizioneH WHERE nome=nomeH;
+        INSERT INTO MODIFICAHABITAT(timestamp, nomeHabitat, nomeAmministratore) VALUES (timestampH, nomeH, nomeAmministratoreH);
 	END IF;
 END $
 DELIMITER ;
@@ -587,6 +609,10 @@ call nuovoMessaggio(current_date,"PREMIUM","ADMIN","Bella","T'appost");
 call creaNuovaCampagna("5000","CORONAVIRUS","2020-01-01","ADMIN");
 call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
 call nuovaSpecieAnimale(current_date,"ADMIN","brooo","frate","mallared","","Minimo","1999","30","40","2");
+call nuovaSpecieVegetale(current_date,"ADMIN","braaa","frate","mallared","","Minimo","1999","30","40");
+call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/Maremma");
+#INSERT INTO AVVISTAMENTO VALUES (null,"ADMIN","2020-01-01","111111","22222",null,"Lago",null);
+#call aggiornaSpecieVegetale(current_date,"ADMIN","braaa","90","90");
 #call rimuoviSpecieAnimale(current_date,"ADMIN","brooo");
 #call rimuoviSpecieVegetale(current_date,"ADMIN","Galanthus nivalis");
 #call rimuoviHabitat(current_date,"ADMIN","Lago");

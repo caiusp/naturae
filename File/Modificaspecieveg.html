@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Modifica scheda vegetale</title>
+    <link rel="stylesheet" type="text/css" href="css/Modificaspecieveg.css">
+
+  </head>
+  <body>
+    <div id="inserimento">
+      <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
+    </div>
+    <div id="cerca">
+      <form class="" action="" method="post">
+        <input type="search" name="cerca" placeholder="Cerca scheda vegetale">
+        <input type="submit" name="invio" value="Invia">
+      </form>
+
+
+    </div>
+
+
+
+    <div id="dati">
+
+
+    <h1>Modifica di SPECIE VEGETALE</h1><br>
+
+    <form class="" action="Modificaspecieveg_Server.php" method="post">
+
+    <label>Inserisci il nome latino della specie che vuoi aggiornare: </label><br><input type="text" name="nomelat" placeholder="Marsilea quadrifolia"><br>
+    <label>Nuova lunghezza: </label><br><input type="number" name="lunghezza" placeholder="30"><br>
+    <label>Nuovo diametro: </label><br><input type="number" name="diametro" placeholder="40"><br><br>
+
+    <input type="submit" name="send_specievegetale" value="Invia">
+
+    </form>
+    </div>
+
+  </body>
+</html>
