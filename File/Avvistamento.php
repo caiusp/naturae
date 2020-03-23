@@ -16,7 +16,7 @@
         <input type="number" name="latitudine" placeholder="43.961314" required><br>
         <label>Longitudine</label><br>
         <input type="number" name="longitudine" placeholder="74.902334" required>
-        <label>Foto:</label><input type="file" name="foto" required><br><br>
+        <label>Foto:</label><input type="file" name="foto" accept="image/jpeg, image/x-png" required><br>
         <label>Habitat: </label>
       <?php
       
