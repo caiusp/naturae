@@ -19,13 +19,13 @@ body, html{
   overflow: auto;
 }
 #dati{
-position: absolute;
+position: relative;
  width: 300px;
  height: 250px;
  z-index: 15;
- top: 50%;
- left: 50%;
- margin: -130px 0 0 -170px;
+ top:20%;
+ margin-left: auto;
+ margin-right: auto;
 
   background-color: lightgrey;
   border: 2px solid black;
