@@ -21,13 +21,14 @@ body, html{
 }
 
 #contenitore{
-  position: absolute;
+  position: relative;
    width: 400px;
    height: 430px;
    z-index: 15;
-   top: 35%;
+   top: 10%;
    left: 45%;
-   margin: -130px 0 0 -170px;
+   margin-left: auto;
+   margin-right: auto;
 
     background-color: lightgrey;
     border: 2px solid black;
