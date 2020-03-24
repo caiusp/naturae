@@ -28,8 +28,8 @@ body, html{
    height: 550px;
    z-index: 15;
    top: 40%;
-   left: 50%;
-   margin: -210px 0 0 -170px;
+   left: 45%;
+   margin: -200px 0 0 -170px;
 
     background-color: lightgrey;
     border: 2px solid black;
@@ -52,6 +52,13 @@ input[type=text], input[type="number"], textarea{
   margin: 8px 0;
   box-sizing: border-box;
   padding: 8px 8px;
+  border-radius: 5px;
+}
+input[type="date"]{
+  width: 100px;
+}
+input[name="orarioP"], input[name="orarioA"]{
+  width: 50px;
 }
 
 input[type="submit"]{
