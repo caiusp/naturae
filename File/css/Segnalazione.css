@@ -21,20 +21,21 @@ body, html{
 }
 
 #contenitore{
-  position: absolute;
+  position: relative;
    width: 400px;
    height: 450px;
    z-index: 15;
-   top: 40%;
-   left: 45%;
-   margin: -170px 0 0 -180px;
+   top: 20%;
+
+   margin-left: auto;
+   margin-right: auto;
 
     background-color: lightgrey;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 20px;
     padding-left: 20px;
     padding-right: 20px;
-  line-height:30px;
+    line-height: 30px;
 }
 
 input{
