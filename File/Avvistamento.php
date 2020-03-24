@@ -21,8 +21,6 @@
       <?php
       
         $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
-        <label>Habitat: </label> <select name="habitat">
-          <input type="text" name="habitat" required>
 
         $result=mysqli_query($db,"SELECT nome FROM habitat");
         echo "<select name='habitat'>";
@@ -34,7 +32,6 @@
       ?>  
 
         <input type="submit" name="send_avvistamento" value="Invia"></a>
-
       </form>
       </div>
 
