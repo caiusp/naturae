@@ -203,12 +203,11 @@ INSERT INTO SPECIE VALUES("MAMMALIA","Chionomys nivalis","Arvicola delle nevi",1
 INSERT INTO SPECIEANIMALE VALUES("Chionomys nivalis",100,48,6);
 INSERT INTO OSPITA VALUES("Chionomys nivalis","Foresta di conifere");
 #inserimento utente admin
-INSERT INTO UTENTE VALUES("ADMIN","GESTORE",null,null,2020,"admin@admin.com","ADMIN","AMMINISTRATORE");
+INSERT INTO UTENTE VALUES("ADMIN","GESTORE",null,"0",2020,"admin@admin.com","ADMIN","AMMINISTRATORE");
 INSERT INTO UTENTEAMMINISTRATORE VALUES ("ADMIN");
-INSERT INTO UTENTE VALUES("PREMIUM","PREMIUM",null,null,2020,"premium@premium.com","PREMIUM","PREMIUM");
+INSERT INTO UTENTE VALUES("PREMIUM","PREMIUM",null,"0",2020,"premium@premium.com","PREMIUM","PREMIUM");
 INSERT INTO UTENTEPREMIUM VALUES ("PREMIUM",null);
-INSERT INTO AVVISTAMENTO VALUES (null,"ADMIN","2020-01-01","1223","2344",null,"Laguna",null);
-INSERT INTO AVVISTAMENTO VALUES (null,"ADMIN","2020-01-01","45354","4422",null,"Lago",null);
+
 #INSERT INTO CAMPAGNAFONDI VALUES (null,null,"APERTO","5000","CORONAVIRUS","2020-01-01","ADMIN");
 
 #STORED PROCEDURES 1: creo una stored procedures da richiamare all'interno del trigger 1
@@ -382,10 +381,10 @@ END $
 DELIMITER ;
 #STORED PROCEDURE 10: creo nuova proposta
 DELIMITER $
-CREATE PROCEDURE creaNuovaProposta(IN codiceAvvistamentoP INT, IN dataP DATE, commentoP VARCHAR(50), nomeUtenteP VARCHAR(30), nomeLatinoP VARCHAR(30))
+CREATE PROCEDURE creaNuovaProposta(IN codiceAvvistamentoP INT,commentoP VARCHAR(50), nomeUtenteP VARCHAR(30), nomeLatinoP VARCHAR(30))
 BEGIN 
     START TRANSACTION;
-    INSERT INTO PROPOSTACLASSIFICAZIONE(codiceAvvistamento, data, commento, nomeUtente, nomeLatino) VALUES(codiceAvvistamentoP,dataP,commentoP,nomeUtenteP,nomeLatinoP);
+    INSERT INTO PROPOSTACLASSIFICAZIONE(codiceAvvistamento, data, commento, nomeUtente, nomeLatino) VALUES(codiceAvvistamentoP,current_date(),commentoP,nomeUtenteP,nomeLatinoP);
     COMMIT;
 END $
 DELIMITER ;
@@ -573,7 +572,7 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE visualizzaClassificaAffidabilita()
 BEGIN
-		SELECT id,affidabilita FROM UTENTEPREMIUM,CLASSIFICA WHERE UTENTEPREMIUM.idClassifica=CLASSIFICA.id ORDER BY affidabilita DESC; #serve per l'ordinamento DECRESCENTE
+		SELECT nome,affidabilita FROM UTENTEPREMIUM,CLASSIFICA WHERE UTENTEPREMIUM.idClassifica=CLASSIFICA.id ORDER BY affidabilita DESC; #serve per l'ordinamento DECRESCENTE
 END $
 DELIMITER ;
 #STORED PROCEDURE 30: visualizza classifica specie in base al numero di segnalazioni ricevute
@@ -603,7 +602,7 @@ BEGIN
 END $
 DELIMITER ;
 call creaNuovaEscursione("Gita","20","Viaggio in danimarca","Italia-Danimarca","2020-01-01","9","18","PREMIUM"); 
-#call creaNuovoAvvistamento("ADMIN","2020-01-01","1223","2344",null,"Laguna");
+call creaNuovoAvvistamento("ADMIN","2020-01-01","1223","2344",null,"Laguna");
 call nuovoMessaggio(current_date,"ADMIN","ADMIN","Bella","T'appost");
 call nuovoMessaggio(current_date,"PREMIUM","ADMIN","Bella","T'appost");
 call creaNuovaCampagna("5000","CORONAVIRUS","2020-01-01","ADMIN");
@@ -616,4 +615,7 @@ call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/
 #call rimuoviSpecieAnimale(current_date,"ADMIN","brooo");
 #call rimuoviSpecieVegetale(current_date,"ADMIN","Galanthus nivalis");
 #call rimuoviHabitat(current_date,"ADMIN","Lago");
-#call nuovaDonazione("ADMIN","1","30","dai dai");
+call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
+#call creaNuovaProposta("1","dajeeee!","PREMIUM","brooo");
+call nuovaDonazione("PREMIUM","1","30","dai dai");
+call nuovaDonazione("ADMIN","1","30","dai dai");
