@@ -20,11 +20,5 @@ if(mysqli_query($db,$sql)) {
   $message2 = "ERRORE: controlla i valori inseriti";
   echo "<script type='text/javascript'>alert('$message2');</script>";
       };
-    
- 
-
-    }
-
-
-
+}
  ?>

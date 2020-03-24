@@ -7,34 +7,14 @@
 
   </head>
   <body>
-    <input type="button" onclick="location.href='Profilo.html'" value="Torna alla home"/>
+    <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
 
     <div id="contenitore">
-      <h1>Seleziona l'escursione a cui vuoi partecipare: </h1><br>
-      <form class="" action="" method="post">
-        <label>Titolo: </label><br>
-        <select class="escursione" name="escursione" size="8">
-          <option value="0">Seleziona...</option>
-          <option value="1">Seleziona...</option>
-          <option value="2">Seleziona...</option>
-          <option value="3">Seleziona...</option>
-          <option value="4">Seleziona...</option>
-          <option value="5">Seleziona...</option>
-          <option value="6">Seleziona...</option>
-          <option value="7">Seleziona...</option>
-          <option value="8">Seleziona...</option>
-          <option value="9">Seleziona...</option>
-          <option value="10">Seleziona...</option>
-          <option value="11">Seleziona...</option>
-          <option value="12">Seleziona...</option>
+      <h1> ISCRIVITI ALL'ESCURSIONE!  </h1><br>
+      <form class="" action="Iscrizioneescursione_Server.php" method="post">
+        <label>Inserisci il numero ID dell'escursione a cui vorresti partecipare:</label><br><input type="text" name="id" placeholder=""><br>
 
-        </select><br>
-
-        <label>Nr. max partecipanti: </label><input type="number" name="nrpartecipantimax" placeholder=""><br>
-        <label>Nr. partecipanti attuali: </label><input type="number" name="nrpartecipantimax" placeholder=""><br>
-
-
-        <input type="submit" value="Invia">
+        <input type="submit" name="send_escursione" value="Invia">
       </form>
       </div>
 

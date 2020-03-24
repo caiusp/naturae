@@ -7,6 +7,7 @@
 
   </head>
   <body>
+     <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home">
     <div class="profilo">
 
 
@@ -16,59 +17,41 @@
 
 
     <table id="info">
-      <form class="" action="index.html" method="post">
+      <form class="" action="Aggiornaprofilo_Server.php" method="post">
 
 
       <tr>
-        <td rowspan="10"><div id="cambiofoto"><input type="file" name="Foto" accept="image/jpeg, image/x-png">
+      <!--  <td rowspan="10"><div id="cambiofoto"><input type="file" name="foto" accept="image/jpeg, image/x-png"> -->
 
         </div></td>
-        <td><label for="nome">Nickname: </label></td>
-        <td colspan="2">spazio vuoto</td>
+        <td><label for="nickname">Nickname: </label></td>
+        <td colspan="2">NON MODIFICABILE</td>
         <td></td>
       </tr>
 
       <tr>
         <td><label for="email">Email: </label></td>
-        <td colspan="2">spazio vuoto</td>
+        <td colspan="2"><input type="text" name="email"></td>
         <td></td>
 
       </tr>
       <tr>
         <td><label for="nascita">Data di nascita: </label></td>
-        <td colspan="2">spazio vuoto</td>
+        <td colspan="2">NON MODIFICABILE</td>
         <td></td>
 
       </tr>
       <tr>
         <td><label for="professione">Professione: </label></td>
-        <td colspan="2"><input type="text" name="work" placeholder="Medico"></td><!--placeholder prende il valore
+        <td colspan="2"><input type="text" name="professione" placeholder="Medico"></td><!--placeholder prende il valore
         che l'utente ha messo o non in partenza nel database-->
       </tr>
-      <!-- in caso non fosse utente premium i valori saranno non disponibili -->
       <tr>
         <td><label for="tipologia">Tipo utente:</label></td>
-        <td colspan="2">spazio vuoto</td>
+        <td colspan="2">NON MODIFICABILE MANUALMENTE</td>
       </tr>
       <tr>
-        <td><label for="classificazione">Affidabilità: </label></td>
-        <td colspan="2">spazio vuoto</td>
-      </tr>
-      <tr>
-        <td><label for="classificazione">Nr. classificazioni tot.: </label></td>
-        <td colspan="2">spazio vuoto</td>
-      </tr>
-      <tr>
-        <td><label for="classificazione">Nr. classificazioni corrette: </label></td>
-        <td colspan="2">spazio vuoto</td>
-      </tr>
-      <tr>
-        <td><label for="classificazione">Nr. classificazioni non corrette: </label></td>
-        <td colspan="2">spazio vuoto</td>
-
-      </tr>
-      <tr>
-        <td colspan="2"><input type="submit" name="Salva" value="Salva"></td>
+        <td colspan="2"><input type="submit" name="send_aggiorna" value="Salva"></td>
       </tr>
 
         </form>

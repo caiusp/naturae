@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -17,7 +20,7 @@
             <li name="label">Classifica: </li><hr>
             <li><a href="Classificamenuaffidabilita.html">Affidabilità media</a></li><hr>
             <li><a href="Classificamenuspecie.html">Specie</a></li><hr>
-            <li><a href="#">Utenti più attivi</a></li>
+            <li><a href="Classificamenuutentiattivi.html">Utenti più attivi</a></li>
 
 
           </ul>
@@ -31,24 +34,12 @@
         <h1>Classifica affidabilità media: </h1><br><br>
         <div class="lista">
           <ol>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
-            <li>Nomeutente: punteggio</li>
+            <?php 
+              $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
+              $sql="CALL visualizzaClassificaAffidabilita()";
+              mysqli_query($db,$sql);
+              echo $sql;
+              ?>
           </ol>
 
         </div>

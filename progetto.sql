@@ -305,7 +305,7 @@ END $
 DELIMITER ;
 #TRIGGER 5: Incremento l'attributo partecipantiAttuali ogni volta in cui un nuovo utente
 #si iscrive all'escursione
-DELIMITER $
+/*DELIMITER $
 CREATE TRIGGER conteggiaIscritti
 AFTER UPDATE ON ISCRIZIONE
 FOR EACH ROW
@@ -315,7 +315,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-
+*/
 #TRIGGER 6: gestisco le statistiche
 DELIMITER $
 CREATE TRIGGER gestioneClassifiche
@@ -371,6 +371,13 @@ BEGIN
     INSERT INTO UTENTEAMMINISTRATORE(nome) VALUES(nomeU);
 END $
 DELIMITER ;
+#STORED PROCEDURE : aggiorno il profilo dell'utente
+DELIMITER $
+CREATE PROCEDURE aggiornaProfilo(IN nomeU VARCHAR(200),IN emailU VARCHAR(200),IN professioneU VARCHAR(200))
+BEGIN
+	UPDATE UTENTE SET email=emailU, professione=professioneU WHERE nome=nomeU;
+END $
+DELIMITER ;
 #STORED PROCEDURE 9: creo nuovo avvistamento
 DELIMITER $
 CREATE PROCEDURE creaNuovoAvvistamento(IN nomeUtenteA VARCHAR(20),IN dataA DATE, IN latitudineA INT, IN longitudineA INT,IN fotoA BLOB, IN nomeHabitatA VARCHAR(20))
@@ -421,12 +428,12 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE nuovaDonazione(IN nomeUtenteD VARCHAR(20),IN nrProgrCampagnaFondiD INT,IN importoD INT,IN noteD VARCHAR(50))
 BEGIN
+	START TRANSACTION;
 	IF EXISTS(SELECT nrProgr FROM CAMPAGNAFONDI WHERE (CAMPAGNAFONDI.nrProgr=nrProgrCampagnaFondiD)AND(CAMPAGNAFONDI.stato="APERTO")) THEN
-		START TRANSACTION;
 		UPDATE CAMPAGNAFONDI SET saldoAttuale=+importoD;
 		INSERT INTO DONAZIONE(nomeUtente,nrProgrCampagnaFondi,importo,note)VALUES(nomeUtenteD,nrProgrCampagnaFondiD,importoD,noteD);
-		COMMIT;
 	END IF;
+    COMMIT;
 END $
 DELIMITER ;
 #STORED PROCEDURE 15: visualizza escursioni
@@ -457,6 +464,7 @@ DELIMITER $
 CREATE PROCEDURE iscrizioneEscursione(IN idE INT,IN nomeUtenteE VARCHAR(20))
 BEGIN
 	IF EXISTS(SELECT id FROM ESCURSIONE WHERE (ESCURSIONE.id=idE)AND(ESCURSIONE.stato="APERTO")) THEN
+		UPDATE ESCURSIONE SET partecipantiAttuali=partecipantiAttuali+1 WHERE id=idE;
 		INSERT INTO ISCRIZIONE(id_Escursione,nomeUtente)VALUES(idE,nomeUtenteE);
 	END IF;
 END $
@@ -615,6 +623,8 @@ call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/
 #call rimuoviSpecieAnimale(current_date,"ADMIN","brooo");
 #call rimuoviSpecieVegetale(current_date,"ADMIN","Galanthus nivalis");
 #call rimuoviHabitat(current_date,"ADMIN","Lago");
+#call aggiornaProfilo("ADMIN","fabio@ciao.com","Avvocato");
+call iscrizioneEscursione("1","ADMIN");
 call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
 #call creaNuovaProposta("1","dajeeee!","PREMIUM","brooo");
 call nuovaDonazione("PREMIUM","1","30","dai dai");
