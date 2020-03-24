@@ -8,6 +8,11 @@ if(isset($_POST['send_proposta'])){
 	$commento=$_POST['commento'];
 	$nomeLatino=$_POST['nomeLatino'];
 
+	echo $nome;
+	echo $avvistamento;
+	echo $commento;
+	echo $nomeLatino;
+	
 $db=mysqli_connect('localhost','root','Nico1998','progetto')or die("Impossibile connetersi al server, controlla la configurazione");
 
 $sql = "CALL creaNuovaProposta('$avvistamento','$commento','$nome','$nomeLatino')";

@@ -34,7 +34,7 @@ CREATE TABLE SPECIEANIMALE(
 	nome VARCHAR(20) PRIMARY KEY,
     professione VARCHAR(30),
     foto BLOB,
-    contatoreAvvistamentiEffettuati INT DEFAULT NULL,
+    contatoreAvvistamentiEffettuati INT,
     annoNascita INT,
     email VARCHAR(30),
     password VARCHAR(20),
@@ -231,7 +231,7 @@ DELIMITER ;
 #TRIGGER 1: Nel momento in cui si raggiungono almeno 5 proposte, ed
 #esiste una specie che ha ricevuto la maggioranza delle indicazioni di 
 #classificazione, si aggiunge un collegamento tra l'avvistamento e la specie
-DELIMITER $
+/*DELIMITER $
 CREATE TRIGGER contaSpecie
 AFTER INSERT ON PROPOSTACLASSIFICAZIONE
 FOR EACH ROW
@@ -241,7 +241,7 @@ BEGIN
     END IF;
 END $
 DELIMITER ;
-
+*/
 #STOREDPROCEDURE 2: Salvo il nomeUtente che dev'essere promosso a premium
 DELIMITER $
 CREATE PROCEDURE getUtenteDaPromuovere()
@@ -359,7 +359,7 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE creaNuovoUtenteSemplice(IN nomeU VARCHAR(30), IN annoNascitaU INT, IN professioneU VARCHAR(30), IN emailU VARCHAR(20), IN passwordU VARCHAR(20), IN fotoU BLOB)
 BEGIN
-	INSERT INTO UTENTE(nome,annoNascita, professione,email, password, foto, tipoUtente) VALUES(nomeU, annoNascitaU,  professioneU, emailU, passwordU,fotoU, "SEMPLICE");
+	INSERT INTO UTENTE(nome,professione,foto,contatoreAvvistamentiEffettuati,annoNascita,email,password,tipoUtente) VALUES(nomeU,professioneU,fotoU,"0",annoNascitaU, emailU, passwordU, "SEMPLICE");
     INSERT INTO UTENTESEMPLICE(nome) VALUES(nomeU);
 END $
 DELIMITER ;
@@ -367,7 +367,7 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE creaNuovoUtenteAmministratore(IN nomeU VARCHAR(30), IN professioneU VARCHAR(20), IN fotoU BLOB, IN annoNascitaU INT, IN emailU VARCHAR(20), IN passwordU VARCHAR(20))
 BEGIN
-	INSERT INTO UTENTE(nome, professione, foto, annoNascita, email, password) VALUES(nomeU, professioneU, fotoU, annoNascitaU, emailU, passwordU);
+	INSERT INTO UTENTE(nome, professione, foto, contatoreAvvistamentiEffettuati, annoNascita, email, password) VALUES(nomeU, professioneU, fotoU, "0", annoNascitaU, emailU, passwordU);
     INSERT INTO UTENTEAMMINISTRATORE(nome) VALUES(nomeU);
 END $
 DELIMITER ;
@@ -624,8 +624,8 @@ call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/
 #call rimuoviSpecieVegetale(current_date,"ADMIN","Galanthus nivalis");
 #call rimuoviHabitat(current_date,"ADMIN","Lago");
 #call aggiornaProfilo("ADMIN","fabio@ciao.com","Avvocato");
-call iscrizioneEscursione("1","ADMIN");
-call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
-#call creaNuovaProposta("1","dajeeee!","PREMIUM","brooo");
+#call iscrizioneEscursione("1","ADMIN");
+#call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
+call creaNuovaProposta("1","dajeeee!","ADMIN","brooo");
 call nuovaDonazione("PREMIUM","1","30","dai dai");
 call nuovaDonazione("ADMIN","1","30","dai dai");
