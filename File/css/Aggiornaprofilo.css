@@ -45,7 +45,8 @@ table {
   border-radius: 10px;
   width:70%;
   height: 50%;
-  margin-left: 150px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
