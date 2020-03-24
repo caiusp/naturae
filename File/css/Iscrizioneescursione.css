@@ -30,13 +30,13 @@ h1{
   text-decoration: underline;
 }
 #contenitore{
-  position: absolute;
+  position: relative;
    width: 500px;
    height: 500px;
    z-index: 15;
-   top: 30%;
-   left: 40%;
-   margin: -130px 0 0 -170px;
+   top:15%;
+   margin-left: auto;
+   margin-right: auto;
 
     background-color: lightgrey;
     border: 2px solid black;
