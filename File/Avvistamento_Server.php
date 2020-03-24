@@ -14,17 +14,20 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL creaNuovoAvvistamento('$nome','$data','$latitudine','$longitudine','$foto','$habitat')";
 
 if(mysqli_query($db,$sql)) {
+  
+  /*DEPRECATED
   $message = "AVVISTAMENTO INSERITO!";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+  echo "<script type='text/javascript'>alert('AVVISTAMENTO INSERITO!');</script>"; location: "avvistamento.php";
+  */
+    echo '<script language="javascript">';
+        echo 'alert("AVVISTAMENTO INSERITO!"); location.href="avvistamento.php"';
+        echo '</script>';
+  
 } else {
   $message2 = "ERRORE: controlla i valori inseriti";
   echo "<script type='text/javascript'>alert('$message2');</script>";
       };
-    
- 
-
     }
-
 
 
  ?>
