@@ -45,12 +45,6 @@ if(isset($_SESSION['nome'])) {
         if(isset($_SESSION['eseguita'])) ?>
         <div class="error success">
         <h3>
-        <?php
-
-        $message = "Adesso sei connesso";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        unset($_SESSION['eseguita']);
-        ?>
       </h3>
         </div>
       <!--se l'utente logga stampa le sue informazioni-->
