@@ -138,7 +138,7 @@ if(isset($_SESSION['nome'])) {
   <a href="Modificaspecieveg.html"><i class="fa fa-tree"></i> Modifica scheda vegetale</a>
   <a href="Modificaspeciean.html"><i class="fa fa-linux"></i> Modifica scheda animale</a>
   <a href="Modificaschedahabitat.html"><i class="fa fa-fw fa-flag"></i>Modifica scheda habitat</a>
-  <a href=""><i class="fa fa-arrow-up"></i> Modifica classificazione</a>
+  <a href="Modificaclassificazione.html"><i class="fa fa-arrow-up"></i> Modifica classificazione</a>
   <a href="Campagna.html"><i class="fa fa-fw fa-trophy"></i>Apri campagna</a>
   <a href="Rimuovischeda.html"><i class="fa fa-trash"></i> Elimina scheda</a><br>
 
