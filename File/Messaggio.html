@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Pagina invio messaggio</title>
-    <link rel="stylesheet" type="text/css" href="css/messaggio.css">
-  </head>
-  <body>
-    <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
+<head>
+  <meta charset="utf-8">
+  <title>Pagina invio messaggio</title>
+  <link rel="stylesheet" type="text/css" href="css/messaggio.css">
+</head>
+<body>
+  <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
 
-    <div id="contenitore">
-      <h1>Messaggio: </h1><br>
-      <form class="" action="Messaggio_Server.php" method="post">
-        <label>Nickname destinatario: </label><br>
-        <input type="text" name="destinatario" placeholder="nickname"><br>
-        <label>Titolo: </label><br>
-        <input type="text" name="titolo"><br>
-        <label>Testo:</label><br>
-        <textarea name="testo" rows="4" cols="50" maxlength="200"></textarea><br>
+  <div id="contenitore">
+    <h1>Messaggio: </h1><br>
+    <form class="" action="Messaggio_Server.php" method="post">
+      <label>Nickname destinatario: </label><br>
+      <input type="text" name="destinatario" placeholder="nickname"><br>
+      <label>Titolo: </label><br>
+      <input type="text" name="titolo"><br>
+      <label>Testo:</label><br>
+      <textarea name="testo" rows="4" cols="50" maxlength="200"></textarea><br>
 
 
-        <input type="submit" name="send_messaggio" value="Invia">
-      </form>
-      </div>
+      <input type="submit" name="send_messaggio" value="Invia">
+    </form>
+  </div>
 
-  </body>
+</body>
 </html>
