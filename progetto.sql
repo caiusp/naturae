@@ -14,7 +14,7 @@ CREATE TABLE SPECIE(
     )ENGINE=INNODB;
     
 CREATE TABLE SPECIEVEGETALE(
-	nomeLatino VARCHAR(30) PRIMARY KEY,
+	nomeLatino VARCHAR(200) PRIMARY KEY,
     lunghezza INT,
     diametro INT,
     
@@ -31,33 +31,26 @@ CREATE TABLE SPECIEANIMALE(
 ) ENGINE=INNODB;
     
     CREATE TABLE UTENTE(
-	nome VARCHAR(20) PRIMARY KEY,
-    professione VARCHAR(30),
+	nome VARCHAR(200) PRIMARY KEY,
+    professione VARCHAR(200),
     foto BLOB,
     contatoreAvvistamentiEffettuati INT,
     annoNascita INT,
-    email VARCHAR(30),
-    password VARCHAR(20),
+    email VARCHAR(200),
+    password VARCHAR(200),
     tipoUtente ENUM("SEMPLICE","PREMIUM","AMMINISTRATORE")
 ) ENGINE=INNODB;
 
 CREATE TABLE UTENTESEMPLICE(
-	nome VARCHAR(20) PRIMARY KEY REFERENCES UTENTE(nome)
-)ENGINE=INNODB;
-
-CREATE TABLE CLASSIFICA(
-	id INT AUTO_INCREMENT PRIMARY KEY,
-    classificazioniTotali INT,
-    classificazioniCorrette INT,
-    classificazioniErrate INT,
-    affidabilita INT DEFAULT NULL
+	nome VARCHAR(200) PRIMARY KEY REFERENCES UTENTE(nome)
 )ENGINE=INNODB;
     
 CREATE TABLE UTENTEPREMIUM(
 	nome VARCHAR(200) PRIMARY KEY REFERENCES UTENTE(nome),
-    idClassifica INT,
-    
-    FOREIGN KEY(idClassifica) REFERENCES CLASSIFICA(id)
+	classificazioniTotali INT,
+    classificazioniCorrette INT,
+    classificazioniErrate INT,
+    affidabilita INT DEFAULT NULL
 )ENGINE=INNODB;
 
 CREATE TABLE UTENTEAMMINISTRATORE(
@@ -81,16 +74,16 @@ CREATE TABLE HABITAT(
 
 CREATE TABLE MODIFICAHABITAT(
 	timestamp TIMESTAMP,
-    nomeHabitat VARCHAR(20),
-    nomeAmministratore VARCHAR(20),
+    nomeHabitat VARCHAR(200),
+    nomeAmministratore VARCHAR(200),
     
 	FOREIGN KEY(nomeHabitat) REFERENCES HABITAT(nome),
     FOREIGN KEY(nomeAmministratore) REFERENCES UTENTEAMMINISTRATORE(nome)
 ) ENGINE=INNODB;
 
 CREATE TABLE OSPITA(
-	nomeLatinoSpecie VARCHAR(30) REFERENCES SPECIE(nomeLatino) ON DELETE CASCADE,
-	nomeHabitat VARCHAR(30) REFERENCES HABITAT(nome) ON DELETE CASCADE,
+	nomeLatinoSpecie VARCHAR(200) REFERENCES SPECIE(nomeLatino) ON DELETE CASCADE,
+	nomeHabitat VARCHAR(200) REFERENCES HABITAT(nome) ON DELETE CASCADE,
     
     PRIMARY KEY(nomeLatinoSpecie,nomeHabitat)
 ) ENGINE=INNODB;
@@ -112,7 +105,7 @@ CREATE TABLE CAMPAGNAFONDI(
     saldoAttuale INT,
     stato ENUM ("APERTO","CHIUSO"),
     importoObiettivo INT, 
-    descrizione VARCHAR(150),
+    descrizione VARCHAR(250),
     dataInizio DATE,
     nomeFondatore VARCHAR(200),
     
@@ -138,13 +131,13 @@ CREATE TABLE ESCURSIONE(
 
 CREATE TABLE AVVISTAMENTO(
 	codice INT AUTO_INCREMENT PRIMARY KEY,
-    nomeUtente VARCHAR(20),
+    nomeUtente VARCHAR(200),
     data DATE,
     latitudine INT,
     longitudine INT, 
     foto blob,
-    nomeHabitat VARCHAR(20),
-    nomeLatino VARCHAR(30),
+    nomeHabitat VARCHAR(200),
+    nomeLatino VARCHAR(200),
     
     FOREIGN KEY(nomeUtente) REFERENCES UTENTE(nome),
     FOREIGN KEY(nomeHabitat) REFERENCES HABITAT(nome),
@@ -153,10 +146,10 @@ CREATE TABLE AVVISTAMENTO(
 
 CREATE TABLE DONAZIONE(
 	codice INT AUTO_INCREMENT PRIMARY KEY,
-	nomeUtente VARCHAR(20),
+	nomeUtente VARCHAR(200),
     nrProgrCampagnaFondi INT,
     importo INT,
-    note VARCHAR(50),
+    note VARCHAR(200),
     
     FOREIGN KEY(nomeUtente) REFERENCES UTENTE(nome) ON DELETE CASCADE,
     FOREIGN KEY(nrProgrCampagnaFondi) REFERENCES CAMPAGNAFONDI(nrProgr) ON DELETE CASCADE
@@ -165,9 +158,9 @@ CREATE TABLE DONAZIONE(
 CREATE TABLE PROPOSTACLASSIFICAZIONE(
     codiceAvvistamento INT,
     data DATE,
-    commento VARCHAR(50),
-    nomeUtente VARCHAR(20),
-    nomeLatino VARCHAR(30),
+    commento VARCHAR(300),
+    nomeUtente VARCHAR(200),
+    nomeLatino VARCHAR(200),
     
     PRIMARY KEY(codiceAvvistamento,nomeUtente),
 	FOREIGN KEY(nomeUtente) REFERENCES UTENTE(nome) ON DELETE CASCADE,
@@ -175,11 +168,10 @@ CREATE TABLE PROPOSTACLASSIFICAZIONE(
 ) ENGINE=INNODB;
 
 CREATE TABLE ISCRIZIONE(
-    id INT AUTO_INCREMENT REFERENCES ESCURSIONE(nMaxPartecipanti) ON DELETE CASCADE,
     id_Escursione INT REFERENCES ESCURSIONE(id),
-    nomeUtente VARCHAR(20) REFERENCES UTENTE(nome) ON DELETE CASCADE,
+    nomeUtente VARCHAR(200) REFERENCES UTENTE(nome) ON DELETE CASCADE,
     
-    PRIMARY KEY(id, nomeUtente)
+    PRIMARY KEY(id_Escursione, nomeUtente)
 ) ENGINE=INNODB;
 
 #inserimento habitat
@@ -206,49 +198,35 @@ INSERT INTO OSPITA VALUES("Chionomys nivalis","Foresta di conifere");
 INSERT INTO UTENTE VALUES("ADMIN","GESTORE",null,"0",2020,"admin@admin.com","ADMIN","AMMINISTRATORE");
 INSERT INTO UTENTEAMMINISTRATORE VALUES ("ADMIN");
 INSERT INTO UTENTE VALUES("PREMIUM","PREMIUM",null,"0",2020,"premium@premium.com","PREMIUM","PREMIUM");
-INSERT INTO UTENTEPREMIUM VALUES ("PREMIUM",null);
+INSERT INTO UTENTEPREMIUM VALUES ("PREMIUM","0","0","0","0");
 
-#INSERT INTO CAMPAGNAFONDI VALUES (null,null,"APERTO","5000","CORONAVIRUS","2020-01-01","ADMIN");
-
-#STORED PROCEDURES 1: creo una stored procedures da richiamare all'interno del trigger 1
-DELIMITER $
-CREATE PROCEDURE getSpecieMaggioranza()
-BEGIN
-	create view contaSpecie(tot,nomeLatino) as (
-		select count(*)as tot, nomeLatino
-		from PROPOSTACLASSIFICAZIONE,AVVISTAMENTO
-		where (AVVISTAMENTO.codice=codiceAvvistamento)
-		group by nomeLatino
-		having count(*)>=5
-	);
-	select nomeLatino
-	from contaSpecie
-	group by nomeLatino
-	having max(tot);
-END $
-DELIMITER ;
-
-#TRIGGER 1: Nel momento in cui si raggiungono almeno 5 proposte, ed
+#TRIGGER 1: Nel momento in cui si raggiungono 5 proposte ad un avvistamento, ed
 #esiste una specie che ha ricevuto la maggioranza delle indicazioni di 
 #classificazione, si aggiunge un collegamento tra l'avvistamento e la specie
-/*DELIMITER $
-CREATE TRIGGER contaSpecie
+DELIMITER $
+CREATE TRIGGER classificaSpecie
 AFTER INSERT ON PROPOSTACLASSIFICAZIONE
 FOR EACH ROW
-BEGIN
-	IF (SELECT codice FROM AVVISTAMENTO,PROPOSTACLASSIFICAZIONE WHERE (codiceAvvistamento=codice) GROUP BY codice HAVING count(*)>=5) = AVVISTAMENTO.codice THEN
-    INSERT INTO AVVISTAMENTO(nomeLatino) VALUES(getSpecieMaggioranza());
-    END IF;
-END $
-DELIMITER ;
-*/
-#STOREDPROCEDURE 2: Salvo il nomeUtente che dev'essere promosso a premium
-DELIMITER $
-CREATE PROCEDURE getUtenteDaPromuovere()
-BEGIN
-	SELECT nomeUtente FROM AVVISTAMENTO GROUP BY nomeUtente HAVING count(*)>=3;
-END $
-DELIMITER ;
+BEGIN 
+DECLARE specie VARCHAR(200);
+if((SELECT count(*) FROM PROPOSTACLASSIFICAZIONE WHERE codiceAvvistamento=NEW.codiceAvvistamento)>=5) THEN 
+SET specie =( SELECT nomeLatino
+			  FROM PROPOSTACLASSIFICAZIONE
+              WHERE codiceAvvistamento=NEW.codiceAvvistamento
+              GROUP BY nomeLatino
+              HAVING count(*)>= ALL (SELECT count(*)
+									 FROM PROPOSTACLASSIFICAZIONE
+                                     WHERE codiceAvvistamento=NEW.codiceAvvistamento
+                                     GROUP BY nomeLatino) LIMIT 1);
+UPDATE AVVISTAMENTO SET nomeLatino=specie WHERE codice=NEW.codiceAvvistamento;
+UPDATE UTENTEPREMIUM INNER JOIN PROPOSTACLASSIFICAZIONE ON UTENTEPREMIUM.nome=PROPOSTACLASSIFICAZIONE.nomeUtente SET classificazioniCorrette=classificazioniCorrette+1 WHERE PROPOSTACLASSIFICAZIONE.nomeUtente=UTENTEPREMIUM.nome AND PROPOSTACLASSIFICAZIONE.nomeLatino=specie;
+UPDATE UTENTEPREMIUM INNER JOIN PROPOSTACLASSIFICAZIONE ON UTENTEPREMIUM.nome=PROPOSTACLASSIFICAZIONE.nomeUtente SET classificazioniTotali=classificazioniTotali+1 WHERE PROPOSTACLASSIFICAZIONE.nomeUtente=UTENTEPREMIUM.nome AND PROPOSTACLASSIFICAZIONE.nomeLatino=specie;
+UPDATE UTENTEPREMIUM INNER JOIN PROPOSTACLASSIFICAZIONE ON UTENTEPREMIUM.nome=PROPOSTACLASSIFICAZIONE.nomeUtente SET classificazioniErrate=classificazioniErrate+1 WHERE PROPOSTACLASSIFICAZIONE.nomeUtente=UTENTEPREMIUM.nome AND PROPOSTACLASSIFICAZIONE.nomeLatino<>specie;
+UPDATE UTENTEPREMIUM INNER JOIN PROPOSTACLASSIFICAZIONE ON UTENTEPREMIUM.nome=PROPOSTACLASSIFICAZIONE.nomeUtente SET classificazioniTotali=classificazioniTotali+1 WHERE PROPOSTACLASSIFICAZIONE.nomeUtente=UTENTEPREMIUM.nome AND PROPOSTACLASSIFICAZIONE.nomeLatino<>specie;
+UPDATE UTENTEPREMIUM SET affidabilita=classificazioniCorrette/classificazioniTotali;
+end if;
+end $
+DELIMITER ; 
 
 #TRIGGER 2: Un utente semplice viene promosso a utente premium
 #nel momento in cui inserisce almeno 3 segnalazioni
@@ -264,97 +242,58 @@ BEGIN
   CLOSE c;
   IF(cont>2) THEN
     UPDATE UTENTE SET tipoUtente="PREMIUM" WHERE ((UTENTE.nome=NEW.nomeUtente) AND (UTENTE.tipoUtente="SEMPLICE"));
+    INSERT INTO UTENTEPREMIUM(nome,classificazioniTotali,classificazioniCorrette,classificazioniErrate,affidabilita) VALUES(NEW.nomeUtente,"0","0","0","0");
+    DELETE FROM UTENTESEMPLICE WHERE nome=NEW.nomeUtente;
   END IF;
 END $
 DELIMITER ;
-/*
-DELIMITER $
-CREATE TRIGGER aggiornaUtente
-AFTER INSERT ON AVVISTAMENTO
-FOR EACH ROW
-BEGIN
-	IF ((SELECT nomeUtente FROM AVVISTAMENTO GROUP BY nomeUtente HAVING count(*)>=3 ) = AVVISTAMENTO.nomeUtente) THEN
-	INSERT INTO UTENTEPREMIUM(nome) VALUES(getUtenteDaPromuovere());
-    UPDATE UTENTE SET tipoUtente="PREMIUM";
-    DELETE FROM UTENTESEMPLICE WHERE UTENTESEMPLICE.nome=UTENTEPREMIUM.nome;
-    END IF;
-END $
-DELIMITER ; */
+
 #TRIGGER 3: Chiude l'escursione appena si raggiunge il numero max
 #dei partecipanti
 DELIMITER $
-CREATE TRIGGER chiudiEscursione
-AFTER UPDATE ON ESCURSIONE
+CREATE TRIGGER chiudiEscursione # SEMBRA CORRETTA MA NON CHIUDE 
+AFTER INSERT ON ISCRIZIONE
 FOR EACH ROW 
 BEGIN 
-	UPDATE ESCURSIONE SET stato='CHIUSO' WHERE (partecipantiAttuali>=nMaxPartecipanti);
-END $
-DELIMITER ;
+	DECLARE s INT;
+    DECLARE max INT;
+    DECLARE x CURSOR FOR SELECT count(*) FROM ISCRIZIONE WHERE id_Escursione=NEW.id_Escursione;
+    DECLARE y CURSOR FOR SELECT nMaxPartecipanti FROM ESCURSIONE WHERE id=NEW.id_Escursione;
+    OPEN x;
+    FETCH x INTO s;
+    CLOSE x;
+    OPEN y;
+    FETCH y INTO max;
+    CLOSE y;
+    IF (s>=max) THEN
+	UPDATE ESCURSIONE SET ESCURSIONE.stato='CHIUSO' WHERE ESCURSIONE.id=NEW.id_Escursione AND ESCURSIONE.stato="APERTO";
+    END IF;
+END $ 
+DELIMITER ;  
 #TRIGGER 4: Quando la campagna fondi raggiunge l'importo previsto, il 
 #suo stato viene settato a "Chiuso" e non è possibile ricevere altre 
 #donazioni dagli utenti 
 DELIMITER $
 CREATE TRIGGER chiudiCampagna
-AFTER UPDATE ON CAMPAGNAFONDI 
-FOR EACH ROW
-BEGIN 
-	IF (NEW.saldoAttuale <> OLD.saldoAttuale) THEN
-    UPDATE CAMPAGNAFONDI SET stato='CHIUSO' WHERE (saldoAttuale>=importoObiettivo);
-	END IF;
-END $
-DELIMITER ;
-#TRIGGER 5: Incremento l'attributo partecipantiAttuali ogni volta in cui un nuovo utente
-#si iscrive all'escursione
-/*DELIMITER $
-CREATE TRIGGER conteggiaIscritti
-AFTER UPDATE ON ISCRIZIONE
-FOR EACH ROW
-BEGIN 
-	IF (ISCRIZIONE.id=ESCURSIONE.id) THEN
-		UPDATE ESCURSIONE SET partecipantiAttuali=partecipantiAttuali+1;
-	END IF;
-END $
-DELIMITER ;
-*/
-#TRIGGER 6: gestisco le statistiche
-DELIMITER $
-CREATE TRIGGER gestioneClassifiche
-AFTER UPDATE ON AVVISTAMENTO
-FOR EACH ROW
-BEGIN
-	IF (AVVISTAMENTO.nomeLatino<>NULL) THEN 
-		IF (AVVISTAMENTO.nomeLatino=PROPOSTACLASSIFICAZIONE.nomeLatino) THEN
-			IF(select id from CLASSIFICA,UTENTE,UTENTEPREMIUM where ((UTENTE.nome=UTENTEPREMIUM.nome) and (UTENTEPREMIUM.classificaId=CLASSIFICA.id)) = CLASSIFICA.id) THEN
-				UPDATE CLASSIFICA.classificazioniCorrette SET CLASSIFICA.classificazioniCorrette=CLASSIFICA.classificazioniCorrette+1;
-				UPDATE CLASSIFICA.classificazioniTotali SET CLASSIFICA.classificazioniTotali=CLASSIFICA.classificazioniTotali+1;
-                UPDATE CLASSIFICA.affidabilita SET CLASSIFICA.affidabilita=calcolaAffidabilita();
-			END IF;
-		ELSE 
-			IF(select id from CLASSIFICA,UTENTE,UTENTEPREMIUM where ((UTENTE.nome=UTENTEPREMIUM.nome) and (UTENTEPREMIUM.classificaId=CLASSIFICA.id)) = CLASSIFICA.id) THEN
-				UPDATE CLASSIFICA.classificazioniErrate SET CLASSIFICA.classificazioniErrate=CLASSIFICA.classificazioniErrate+1;
-                UPDATE CLASSIFICA.classificazioniTotali SET CLASSIFICA.classificazioniTotali=CLASSIFICA.classificazioniTotali+1;
-				UPDATE CLASSIFICA.affidabilita SET CLASSIFICA.affidabilita=calcolaAffidabilita();
-			END IF;
-		END IF;
-	END IF;
-END $
-DELIMITER ;
-/*#TRIGGER X: La somma delle donazioni compone il saldoAttuale della campagnaFondi
-DELIMITER $
-CREATE TRIGGER saldoAttuale
 AFTER INSERT ON DONAZIONE
 FOR EACH ROW
 BEGIN
-	UPDATE CAMPAGNAFONDI SET CAMPAGNAFONDI.saldoAttuale=CAMPAGNAFONDI.saldoAttuale+(SELECT importo FROM DONAZIONE WHERE DONAZIONE.nrProgrCampagnaFondi=CAMPAGNAFONDI.nrProgr);
-END $
-DELIMITER ;  */
-#STORED PROCEDURE 4: calcolo affidabilità
-DELIMITER $
-CREATE PROCEDURE calcolaAffidabilita()
-BEGIN	
-	UPDATE CLASSIFICA.affidabilita SET CLASSIFICA.affidabilita=CLASSIFICA.classificazioniCorrette/CLASSIFICA.classificazioniTotali;
+	DECLARE s INT;
+    DECLARE tot INT;
+    DECLARE x CURSOR FOR SELECT sum(importo) FROM DONAZIONE WHERE nrProgrCampagnaFondi=NEW.nrProgrCampagnaFondi;
+    DECLARE y CURSOR FOR SELECT importoObiettivo FROM CAMPAGNAFONDI WHERE nrProgr=NEW.nrProgrCampagnaFondi;
+    OPEN x;
+    FETCH x INTO s;
+    CLOSE x;
+    OPEN y;
+    FETCH y into tot;
+    CLOSE y;
+    IF (s>=tot) THEN 
+    UPDATE CAMPAGNAFONDI SET stato='CHIUSO' WHERE nrProgr=NEW.nrProgrCampagnaFondi AND stato="APERTO";
+    END IF;
 END $
 DELIMITER ;
+
 #STORED PROCEDURE 5: creo nuovo utente semplice
 DELIMITER $
 CREATE PROCEDURE creaNuovoUtenteSemplice(IN nomeU VARCHAR(30), IN annoNascitaU INT, IN professioneU VARCHAR(30), IN emailU VARCHAR(20), IN passwordU VARCHAR(20), IN fotoU BLOB)
@@ -390,9 +329,11 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE creaNuovaProposta(IN codiceAvvistamentoP INT,commentoP VARCHAR(50), nomeUtenteP VARCHAR(30), nomeLatinoP VARCHAR(30))
 BEGIN 
+	IF EXISTS (SELECT codice FROM AVVISTAMENTO WHERE codice=codiceAvvistamentoP) THEN
     START TRANSACTION;
     INSERT INTO PROPOSTACLASSIFICAZIONE(codiceAvvistamento, data, commento, nomeUtente, nomeLatino) VALUES(codiceAvvistamentoP,current_date(),commentoP,nomeUtenteP,nomeLatinoP);
     COMMIT;
+    END IF;
 END $
 DELIMITER ;
 #STORED PROCEDURE 11: creo nuova escursione
@@ -400,7 +341,7 @@ DELIMITER $
 CREATE PROCEDURE creaNuovaEscursione(IN titoloE VARCHAR(20),IN nMaxPartecipantiE INT,IN descrizioneE VARCHAR(200),IN tragittoE VARCHAR(200),IN dataE DATE,IN orarioPartenzaE INT,IN orarioRitornoE INT,IN nomeCreatoreEscursioneE VARCHAR(20))
 BEGIN
     START TRANSACTION;
-    INSERT INTO ESCURSIONE(titolo,nMaxPartecipanti,descrizione,tragitto,data,stato,partecipantiAttuali,orarioPartenza,orarioRitorno,nomeCreatoreEscursione) VALUES(titoloE,nMaxPartecipantiE,descrizioneE,tragittoE,dataE,"APERTO","",orarioPartenzaE,orarioRitornoE,nomeCreatoreEscursioneE);
+    INSERT INTO ESCURSIONE(titolo,nMaxPartecipanti,descrizione,tragitto,data,stato,partecipantiAttuali,orarioPartenza,orarioRitorno,nomeCreatoreEscursione) VALUES(titoloE,nMaxPartecipantiE,descrizioneE,tragittoE,dataE,"APERTO","0",orarioPartenzaE,orarioRitornoE,nomeCreatoreEscursioneE);
     COMMIT;
 END $
 DELIMITER ;
@@ -409,7 +350,7 @@ DELIMITER $
 CREATE PROCEDURE creaNuovaCampagna(IN importoObiettivoC INT,IN descrizioneC VARCHAR(150),IN dataInizioC DATE,IN nomeFondatoreC VARCHAR(200))
 BEGIN
     START TRANSACTION;
-    INSERT INTO CAMPAGNAFONDI(stato,importoObiettivo,descrizione,dataInizio,nomeFondatore)VALUES("APERTO",importoObiettivoC,descrizioneC,dataInizioC,nomeFondatoreC);
+    INSERT INTO CAMPAGNAFONDI(saldoAttuale,stato,importoObiettivo,descrizione,dataInizio,nomeFondatore)VALUES("0","APERTO",importoObiettivoC,descrizioneC,dataInizioC,nomeFondatoreC);
     COMMIT;
 END $
 DELIMITER ;
@@ -430,7 +371,7 @@ CREATE PROCEDURE nuovaDonazione(IN nomeUtenteD VARCHAR(20),IN nrProgrCampagnaFon
 BEGIN
 	START TRANSACTION;
 	IF EXISTS(SELECT nrProgr FROM CAMPAGNAFONDI WHERE (CAMPAGNAFONDI.nrProgr=nrProgrCampagnaFondiD)AND(CAMPAGNAFONDI.stato="APERTO")) THEN
-		UPDATE CAMPAGNAFONDI SET saldoAttuale=+importoD;
+		UPDATE CAMPAGNAFONDI SET saldoAttuale=saldoAttuale+importoD WHERE nrProgr=nrProgrCampagnaFondiD; 
 		INSERT INTO DONAZIONE(nomeUtente,nrProgrCampagnaFondi,importo,note)VALUES(nomeUtenteD,nrProgrCampagnaFondiD,importoD,noteD);
 	END IF;
     COMMIT;
@@ -463,7 +404,7 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE iscrizioneEscursione(IN idE INT,IN nomeUtenteE VARCHAR(20))
 BEGIN
-	IF EXISTS(SELECT id FROM ESCURSIONE WHERE (ESCURSIONE.id=idE)AND(ESCURSIONE.stato="APERTO")) THEN
+	IF EXISTS(SELECT id FROM ESCURSIONE WHERE (idE=id)AND(ESCURSIONE.stato="APERTO")) THEN
 		UPDATE ESCURSIONE SET partecipantiAttuali=partecipantiAttuali+1 WHERE id=idE;
 		INSERT INTO ISCRIZIONE(id_Escursione,nomeUtente)VALUES(idE,nomeUtenteE);
 	END IF;
@@ -609,11 +550,14 @@ BEGIN
 	SELECT * FROM contaSegnalazioniUtente ORDER BY tot DESC;
 END $
 DELIMITER ;
+#popolamento db con dati utili
 call creaNuovaEscursione("Gita","20","Viaggio in danimarca","Italia-Danimarca","2020-01-01","9","18","PREMIUM"); 
+call creaNuovaEscursione("Mare","2","MAREEE","puglia","2020-01-01","9","18","PREMIUM"); 
 call creaNuovoAvvistamento("ADMIN","2020-01-01","1223","2344",null,"Laguna");
 call nuovoMessaggio(current_date,"ADMIN","ADMIN","Bella","T'appost");
 call nuovoMessaggio(current_date,"PREMIUM","ADMIN","Bella","T'appost");
 call creaNuovaCampagna("5000","CORONAVIRUS","2020-01-01","ADMIN");
+call creaNuovaCampagna("3000","RISTRUTTURAZIONE CHIESA","2020-01-01","ADMIN");
 call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
 call nuovaSpecieAnimale(current_date,"ADMIN","brooo","frate","mallared","","Minimo","1999","30","40","2");
 call nuovaSpecieVegetale(current_date,"ADMIN","braaa","frate","mallared","","Minimo","1999","30","40");
@@ -624,8 +568,25 @@ call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/
 #call rimuoviSpecieVegetale(current_date,"ADMIN","Galanthus nivalis");
 #call rimuoviHabitat(current_date,"ADMIN","Lago");
 #call aggiornaProfilo("ADMIN","fabio@ciao.com","Avvocato");
-#call iscrizioneEscursione("1","ADMIN");
+call creaNuovoUtenteSemplice("paz","1997","Calciatore","puz@gmail.com","123","");
+call creaNuovoUtenteSemplice("piz","1997","Calciatore","puz@gmail.com","123","");
+call creaNuovoUtenteSemplice("puz","1997","Calciatore","puz@gmail.com","123","");
+call creaNuovoUtenteSemplice("poz","1997","Calciatore","puz@gmail.com","123","");
+call creaNuovoAvvistamento("piz","2020-01-01","123","2344",null,"Laguna");
+call creaNuovoAvvistamento("piz","2020-01-01","122","2344",null,"Laguna");
+call creaNuovoAvvistamento("piz","2020-01-01","223","2344",null,"Laguna");
+call iscrizioneEscursione("1","ADMIN");
 #call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
 call creaNuovaProposta("1","dajeeee!","ADMIN","brooo");
+call creaNuovaProposta("1","dajeeee!","PREMIUM","brooo");
+call creaNuovaProposta("1","dajeeee!","puz","braaa");
+#call creaNuovaProposta("1","dajeeee!","paz","brooo");
+call creaNuovaProposta("1","dajeeee!","poz","braaa");
+call creaNuovaProposta("1","dajeeee!","piz","braaa");
 call nuovaDonazione("PREMIUM","1","30","dai dai");
 call nuovaDonazione("ADMIN","1","30","dai dai");
+call nuovaDonazione("puz","1","4870","CON QUESTA DONAZIONE VINCIAMO!");
+call nuovaDonazione("piz","2","45","dai dai");
+call iscrizioneEscursione("1","puz");
+call iscrizioneEscursione("2","puz");
+call iscrizioneEscursione("8","puz");
