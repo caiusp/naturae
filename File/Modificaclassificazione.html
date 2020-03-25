@@ -10,51 +10,19 @@
       <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
 
     <div id="contenitore">
-      <div class="scheda">
-        <h1>Lista codici avvistamento con classificazione</h1><br>
-        <div class="codice">
-
-
-          <ul>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-            <li>Codice avvistamento: nomeLatino</li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
+ 
 <div class="modifica">
 
   <h1>Modifica classificazione</h1><br>
 
 
     <div class="modifica1">
-      <form class="" action="" method="post">
+      <form class="" action="Modificaclassificazione_Server.php" method="post">
 
-      <label>Codice avvistamento: </label> <select class="codiceA" name="codiceA">
-      <option value="">CodiceA</option>
-      <option value="">CodiceA</option>
-      <option value="">CodiceA</option>
-      <option value="">CodiceA</option>
-      <option value="">CodiceA</option>
-    </select><br>
-      <label>Nome latino: </label><input type="text" name="nomeLat" name="codiceA"><br>
+      <label>Codice avvistamento: </label><input type="number" name="codiceA" ><br><br>
+      <label>Nome latino: </label><input type="text" name="nomeLat" ><br>
 
-
-
-
-      <input type="submit" value="Invia">
+      <input type="submit" name="send_edit" value="Invia">
 
       </form>
 

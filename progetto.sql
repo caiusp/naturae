@@ -369,12 +369,12 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE nuovaDonazione(IN nomeUtenteD VARCHAR(20),IN nrProgrCampagnaFondiD INT,IN importoD INT,IN noteD VARCHAR(50))
 BEGIN
-	START TRANSACTION;
 	IF EXISTS(SELECT nrProgr FROM CAMPAGNAFONDI WHERE (CAMPAGNAFONDI.nrProgr=nrProgrCampagnaFondiD)AND(CAMPAGNAFONDI.stato="APERTO")) THEN
+		START TRANSACTION;
 		UPDATE CAMPAGNAFONDI SET saldoAttuale=saldoAttuale+importoD WHERE nrProgr=nrProgrCampagnaFondiD; 
 		INSERT INTO DONAZIONE(nomeUtente,nrProgrCampagnaFondi,importo,note)VALUES(nomeUtenteD,nrProgrCampagnaFondiD,importoD,noteD);
+		COMMIT;
 	END IF;
-    COMMIT;
 END $
 DELIMITER ;
 #STORED PROCEDURE 15: visualizza escursioni
@@ -509,10 +509,9 @@ DELIMITER ;
 DELIMITER $
 CREATE PROCEDURE correggiClassificazione(IN codiceX INT,IN nomeLatinoX VARCHAR(30))
 BEGIN
-	IF EXISTS(SELECT codice FROM AVVISTAMENTO WHERE AVVISTAMENTO.codice=codiceX) THEN
-		SET AUTOCOMMIT=0;
+	IF EXISTS(SELECT codice FROM AVVISTAMENTO WHERE codice=codiceX) THEN
         START TRANSACTION;
-		UPDATE nomeLatino SET nomeLatino=nomeLatinoX;
+		UPDATE AVVISTAMENTO SET nomeLatino=nomeLatinoX WHERE codice=codiceX;
         COMMIT;
     END IF;
 END $
@@ -590,3 +589,4 @@ call nuovaDonazione("piz","2","45","dai dai");
 call iscrizioneEscursione("1","puz");
 call iscrizioneEscursione("2","puz");
 call iscrizioneEscursione("8","puz");
+call correggiClassificazione("1","brooo");
