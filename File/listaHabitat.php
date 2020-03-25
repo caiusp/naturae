@@ -45,4 +45,21 @@ echo "<option>".$riga["nome"]."</option>";
 }
 echo "</select>";
 
+
+
+$query="SELECT stato FROM campagnafondi";
+$stato = mysqli_query($connection,$query);
+
+$statoCampagna = "APERTO";
+while($row = mysqli_fetch_array($stato)){
+  print_r($row);
+}
+
+if (strcasecmp($statoCampagna, $row) == 0) {
+    echo "Le stringhe sono uguali";
+} else {
+    echo "Le stringhe non coincidono";
+}
+
+
 ?>
