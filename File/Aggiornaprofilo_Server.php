@@ -13,11 +13,15 @@ $sql = "CALL aggiornaProfilo('$nome','$email','$professione')";
 
 
 if(mysqli_query($db,$sql)){
-	$message= "PROFILO AGGIORNATO!";
-	echo "<script type='text/javascript'>alert('$message');</script>";
+        echo '<script language="javascript">';
+        echo 'alert("PROFILO AGGIORNATO!"); location.href="aggiornaProfilo.html"';
+        echo '</script>';
+
 	} else {
-		$message2 = "ERRORE, CONTROLLA I DATI INSERITI";
-		echo "<script type='text/javascript'>alert($message2);</script>";
+
+		echo '<script language="javascript">';
+        echo 'alert("$ERRORE, CONTROLLA I DATI INSERITI"); location.href="aggiornaProfilo.html"';
+        echo '</script>';
 	};
 }
 

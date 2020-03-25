@@ -13,11 +13,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL aggiornaSpecieVegetale('$timestamp','$nome','$nomelat','$lunghezza','$diametro')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "SPECIE VEGETALE AGGIORNATA CON SUCCESSO!";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE VEGETALE INSERITA!!"); location.href="modificaspecieveg.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE VEGETALE NON INSERITA!"); location.href="modificaspecieveg.html"';
+        echo '</script>';
       };
 }
  ?>

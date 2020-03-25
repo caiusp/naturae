@@ -12,11 +12,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL nuovaDonazione('$nome','$campagna','$importo','$note')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+  		
+  		echo '<script language="javascript">';
+        echo 'alert("DONAZIONE EFFETTUATA!"); location.href="effettuadonazione.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+    		
+  		echo '<script language="javascript">';
+        echo 'alert("PROBLEMA DONAZIONE EFFETTUATA!"); location.href="effettuadonazione.html"';
+        echo '</script>';
       };
 }
  ?>

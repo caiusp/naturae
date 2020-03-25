@@ -18,11 +18,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL nuovaSpecieVegetale('$timestamp','$nome','$nomelat','$nomeita','$classe','$wiki','$vulnerabilita','$anno','$lunghezza','$diametro')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE VEGETALE INSERITA!!"); location.href="inseriscispecievegetale.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE VEGETALE NON INSERITA!"); location.href="inseriscispecievegetale.html"';
+        echo '</script>';
       };
 }
  ?>

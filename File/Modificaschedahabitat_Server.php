@@ -12,11 +12,14 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL aggiornaHabitat('$timestamp','$nome','$habitat','$descrizione')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "HABITAT AGGIORNATO!";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("HABITAT INSERITO!!"); location.href="modificaschedahabitat.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("HABITAT NON INSERITO!"); location.href="modificaschedahabitat.html"';
+        echo '</script>';
       };
-}
  ?>

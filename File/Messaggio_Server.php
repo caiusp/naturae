@@ -13,11 +13,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL nuovoMessaggio('$timestamp','$nome','$destinatario','$titolo','$testo')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("MESSAGGIO INVIATO!!"); location.href="messaggio.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("MESSAGGIO NON INVIATO!"); location.href="messaggio.html"';
+        echo '</script>';
       };
 }
  ?>

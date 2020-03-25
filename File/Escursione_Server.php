@@ -16,11 +16,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL creaNuovaEscursione('$titolo','$nrpart','$descrizione','$tragitto','$data','$orarioP','$orarioR','$nome')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+        
+        echo '<script language="javascript">';
+        echo 'alert("ESCURZIONE INSERITA!"); location.href="escursione.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+  
+        echo '<script language="javascript">';
+        echo 'alert("PROBLEMA INSERIMENTO ESCURSIONE!"); location.href="escursione.html"';
+        echo '</script>';
       };
 }
  ?>

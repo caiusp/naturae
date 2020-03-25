@@ -12,11 +12,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL rimuoviSpecieAnimale('$timestamp','$nome','$schedaanimale')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE ANIMALE RIMOSSA!!"); location.href="rimuovischeda.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE ANIMALE NON RIMOSSA!"); location.href="rimuovischeda.html"';
+        echo '</script>';
       };
 };
 
@@ -25,17 +29,21 @@ if(isset($_POST['rimuovi_vegetale'])) {
   $nome=$_SESSION['nome'];
   $schedavegetale=$_POST['schedavegetale'];
 
-  
-$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
+ //siamo già connessi al db in questa pagina, non credo serva fare altre 2 connessioni 
+//$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
 
 $sql="CALL rimuoviSpecieVegetale('$timestamp','$nome','$schedavegetale')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE VEGETALE RIMOSSA!!"); location.href="rimuovischeda.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("SPECIE VEGETALE NON RIMOSSA!"); location.href="rimuovischeda.html"';
+        echo '</script>';
       };
 };
 
@@ -45,16 +53,20 @@ if(isset($_POST['rimuovi_habitat'])) {
   $schedahabitat=$_POST['schedahabitat'];
 
   
-$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
+//$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
 
 $sql="CALL rimuoviHabitat('$timestamp','$nome','$schedahabitat')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ANDATA";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("HABITAT RIMOSSO!!"); location.href="rimuovischeda.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("HABITAT NON RIMOSSO!"); location.href="rimuovischeda.html"';
+        echo '</script>';
       };
 }
  ?>

@@ -13,13 +13,17 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto')or die("Impossibile 
 $sql = "CALL creaNuovaProposta('$avvistamento','$commento','$nome','$nomeLatino')";
 
 
-if(mysqli_query($db,$sql)){
-	$message= "ANDATA";
-	echo "<script type='text/javascript'>alert('$message');</script>";
-	} else {
-		$message2 = "ERRORE, CONTROLLA DI NUOVO IL CODICE";
-		echo "<script type='text/javascript'>alert($message2);</script>";
-	};
+if(mysqli_query($db,$sql)) {
+          
+        echo '<script language="javascript">';
+        echo 'alert("PROPOSTA INSERITA!!"); location.href="propostaclassificazione.html"';
+        echo '</script>';
+} else {
+          
+        echo '<script language="javascript">';
+        echo 'alert("PROPOSTA NON INSERITA!"); location.href="propostaclassificazione.html"';
+        echo '</script>';
+      };
 }
 
 ?>

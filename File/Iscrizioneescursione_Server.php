@@ -11,11 +11,15 @@ $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile
 $sql="CALL iscrizioneEscursione('$id','$nome')";
 
 if(mysqli_query($db,$sql)) {
-  $message = "ISCRIZIONE ESEGUITA!";
-  echo "<script type='text/javascript'>alert('$message');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("ESCURSIONE INSERITA!!"); location.href="iscrizioneescursione.html"';
+        echo '</script>';
 } else {
-  $message2 = "NON E' ANDATA";
-  echo "<script type='text/javascript'>alert('$message2');</script>";
+          
+        echo '<script language="javascript">';
+        echo 'alert("ESCURSIONE NON INSERITA!"); location.href="iscrizioneescursione.html"';
+        echo '</script>';
       };
 }
  ?>
