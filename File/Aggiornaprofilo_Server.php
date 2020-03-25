@@ -13,6 +13,7 @@ $sql = "CALL aggiornaProfilo('$nome','$email','$professione')";
 
 
 if(mysqli_query($db,$sql)){
+	
         echo '<script language="javascript">';
         echo 'alert("PROFILO AGGIORNATO!"); location.href="aggiornaProfilo.html"';
         echo '</script>';
@@ -20,7 +21,7 @@ if(mysqli_query($db,$sql)){
 	} else {
 
 		echo '<script language="javascript">';
-        echo 'alert("$ERRORE, CONTROLLA I DATI INSERITI"); location.href="aggiornaProfilo.html"';
+        echo 'alert("ERRORE, CONTROLLA I DATI INSERITI"); location.href="aggiornaProfilo.html"';
         echo '</script>';
 	};
 }
