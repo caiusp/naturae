@@ -126,3 +126,7 @@ label{
 h1{
   font-size: 25px;
 }
+
+input[value="Torna alla home"]{
+  filter: opacity(1);
+}
