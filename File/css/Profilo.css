@@ -16,7 +16,7 @@ body{
 /* Style the sidebar - fixed full height */
 .sidebar {
   height: 100%;
-  width: 230px;
+  width: auto;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -42,10 +42,7 @@ body{
 }
 
 /* Style the main content */
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  padding: 0px 10px;
-}
+
 
 
 h1{
@@ -58,7 +55,13 @@ h1{
 
 
 .profilo{
-  height: 100%;
+  position: relative;
+  height: auto;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: auto;
+  padding-right: auto;
 }
 #btnlogout{
   margin-left: 5px;
@@ -66,6 +69,8 @@ h1{
 }
 img{
   float: left;
+  width: 300px;
+  height: 300px;
 }
 
 table, th, td {
@@ -74,17 +79,18 @@ table, th, td {
 }
 table {
   border-spacing: 15px;
-  margin-left: 100px;
   border-radius: 10px;
+  width: 50%;
+  height: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 td{
   font-family: Arial, sans-serif;
 }
 
-.menu{
-  float: right;
-}
+
 input[type="search"]{
   margin-left: 10px;
   box-sizing: border-box;
@@ -103,13 +109,6 @@ input[name="invio"]{
   padding-bottom: 5px;
   display: inline-block;
 }
-
-#info{
-  width:60%;
-  height:200px;
-  position:absolute;
-  left:30%;
-  top:30%;
-  margin-left:-200px;
-  margin-top:-100px;
+a{
+  line-height: 20px;
 }
