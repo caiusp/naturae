@@ -16,12 +16,12 @@ $sql="CALL aggiornaSpecieAnimale('$timestamp','$nome','$nomelat','$peso','$altez
 if(mysqli_query($db,$sql)) {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE ANIMALE INSERITA!!"); location.href="modificaspeciean.html"';
+        echo 'alert("SPECIE ANIMALE INSERITA!!"); location.href="modificaspeciean.php"';
         echo '</script>';
 } else {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE ANIMALE NON INSERITA!"); location.href="modificaspeciean.html"';
+        echo 'alert("SPECIE ANIMALE NON INSERITA!"); location.href="modificaspeciean.php"';
         echo '</script>';
       };
 }

@@ -21,12 +21,12 @@ $sql="CALL nuovaSpecieAnimale('$timestamp','$nome','$nomelat','$nomeita','$class
 if(mysqli_query($db,$sql)) {
         
         echo '<script language="javascript">';
-        echo 'alert("SPECIE ANIMALE INSERITA!"); location.href="inseriscispecieanimale.html"';
+        echo 'alert("SPECIE ANIMALE INSERITA!"); location.href="inseriscispecieanimale.php"';
         echo '</script>';
 } else {
         
         echo '<script language="javascript">';
-        echo 'alert("NON INSERITA!"); location.href="inseriscispecieanimale.html"';
+        echo 'alert("NON INSERITA!"); location.href="inseriscispecieanimale.php"';
         echo '</script>';
       };
 }

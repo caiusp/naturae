@@ -14,12 +14,12 @@ $sql="CALL aggiornaHabitat('$timestamp','$nome','$habitat','$descrizione')";
 if(mysqli_query($db,$sql)) {
           
         echo '<script language="javascript">';
-        echo 'alert("HABITAT INSERITO!!"); location.href="modificaschedahabitat.html"';
+        echo 'alert("HABITAT INSERITO!!"); location.href="modificaschedahabitat.php"';
         echo '</script>';
 } else {
           
         echo '<script language="javascript">';
-        echo 'alert("HABITAT NON INSERITO!"); location.href="modificaschedahabitat.html"';
+        echo 'alert("HABITAT NON INSERITO!"); location.href="modificaschedahabitat.php"';
         echo '</script>';
       };
  ?>

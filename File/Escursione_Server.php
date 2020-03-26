@@ -18,12 +18,12 @@ $sql="CALL creaNuovaEscursione('$titolo','$nrpart','$descrizione','$tragitto','$
 if(mysqli_query($db,$sql)) {
         
         echo '<script language="javascript">';
-        echo 'alert("ESCURSIONE INSERITA!"); location.href="escursione.html"';
+        echo 'alert("ESCURSIONE INSERITA!"); location.href="escursione.php"';
         echo '</script>';
 } else {
   
         echo '<script language="javascript">';
-        echo 'alert("PROBLEMA INSERIMENTO ESCURSIONE!"); location.href="escursione.html"';
+        echo 'alert("PROBLEMA INSERIMENTO ESCURSIONE!"); location.href="escursione.php"';
         echo '</script>';
       };
 }

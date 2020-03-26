@@ -14,12 +14,12 @@ $sql="CALL creaNuovaCampagna('$importo','$descrizione','$data','$nome')";
 if(mysqli_query($db,$sql)) {
   		
   		echo '<script language="javascript">';
-        echo 'alert("INSERITA CON SUCCESSO!"); location.href="campagna.html"';
+        echo 'alert("INSERITA CON SUCCESSO!"); location.href="campagna.php"';
         echo '</script>';
 } else {
   		
   		echo '<script language="javascript">';
-        echo 'alert("Qualcosa è andato storto, riprova!!"); location.href="campagna.html"';
+        echo 'alert("Qualcosa è andato storto, riprova!!"); location.href="campagna.php"';
         echo '</script>';
       };
 }

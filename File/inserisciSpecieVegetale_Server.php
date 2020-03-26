@@ -20,12 +20,12 @@ $sql="CALL nuovaSpecieVegetale('$timestamp','$nome','$nomelat','$nomeita','$clas
 if(mysqli_query($db,$sql)) {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE VEGETALE INSERITA!!"); location.href="inseriscispecievegetale.html"';
+        echo 'alert("SPECIE VEGETALE INSERITA!!"); location.href="inseriscispecievegetale.php"';
         echo '</script>';
 } else {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE VEGETALE NON INSERITA!"); location.href="inseriscispecievegetale.html"';
+        echo 'alert("SPECIE VEGETALE NON INSERITA!"); location.href="inseriscispecievegetale.php"';
         echo '</script>';
       };
 }

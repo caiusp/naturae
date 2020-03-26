@@ -15,12 +15,12 @@ if(isset($_POST['send_specievegetale'])) {
   if(mysqli_query($db,$sql)) {
     
     echo '<script language="javascript">';
-    echo 'alert("SPECIE VEGETALE INSERITA!!"); location.href="modificaspecieveg.html"';
+    echo 'alert("SPECIE VEGETALE INSERITA!!"); location.href="modificaspecieveg.php"';
     echo '</script>';
   } else {
     
     echo '<script language="javascript">';
-    echo 'alert("SPECIE VEGETALE NON INSERITA!"); location.href="modificaspecieveg.html"';
+    echo 'alert("SPECIE VEGETALE NON INSERITA!"); location.href="modificaspecieveg.php"';
     echo '</script>';
   };
 }

@@ -14,12 +14,12 @@ $sql="CALL rimuoviSpecieAnimale('$timestamp','$nome','$schedaanimale')";
 if(mysqli_query($db,$sql)) {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE ANIMALE RIMOSSA!!"); location.href="rimuovischeda.html"';
+        echo 'alert("SPECIE ANIMALE RIMOSSA!!"); location.href="rimuovischeda.php"';
         echo '</script>';
 } else {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE ANIMALE NON RIMOSSA!"); location.href="rimuovischeda.html"';
+        echo 'alert("SPECIE ANIMALE NON RIMOSSA!"); location.href="rimuovischeda.php"';
         echo '</script>';
       };
 };
@@ -37,12 +37,12 @@ $sql="CALL rimuoviSpecieVegetale('$timestamp','$nome','$schedavegetale')";
 if(mysqli_query($db,$sql)) {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE VEGETALE RIMOSSA!!"); location.href="rimuovischeda.html"';
+        echo 'alert("SPECIE VEGETALE RIMOSSA!!"); location.href="rimuovischeda.php"';
         echo '</script>';
 } else {
           
         echo '<script language="javascript">';
-        echo 'alert("SPECIE VEGETALE NON RIMOSSA!"); location.href="rimuovischeda.html"';
+        echo 'alert("SPECIE VEGETALE NON RIMOSSA!"); location.href="rimuovischeda.php"';
         echo '</script>';
       };
 };
@@ -60,12 +60,12 @@ $sql="CALL rimuoviHabitat('$timestamp','$nome','$schedahabitat')";
 if(mysqli_query($db,$sql)) {
           
         echo '<script language="javascript">';
-        echo 'alert("HABITAT RIMOSSO!!"); location.href="rimuovischeda.html"';
+        echo 'alert("HABITAT RIMOSSO!!"); location.href="rimuovischeda.php"';
         echo '</script>';
 } else {
           
         echo '<script language="javascript">';
-        echo 'alert("HABITAT NON RIMOSSO!"); location.href="rimuovischeda.html"';
+        echo 'alert("HABITAT NON RIMOSSO!"); location.href="rimuovischeda.php"';
         echo '</script>';
       };
 }
