@@ -13,12 +13,12 @@ if(isset($_POST['send_escursione'])) {
 	if(mysqli_query($db,$sql)) {
 		
 		echo '<script language="javascript">';
-		echo 'alert("ESCURSIONE INSERITA!!"); location.href="iscrizioneescursione.html"';
+		echo 'alert("ESCURSIONE INSERITA!!"); location.href="iscrizioneescursione.php"';
 		echo '</script>';
 	} else {
 		
 		echo '<script language="javascript">';
-		echo 'alert("ESCURSIONE NON INSERITA!"); location.href="iscrizioneescursione.html"';
+		echo 'alert("ESCURSIONE NON INSERITA!"); location.href="iscrizioneescursione.php"';
 		echo '</script>';
 	};
 }
