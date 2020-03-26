@@ -18,7 +18,7 @@ $sql="CALL creaNuovaEscursione('$titolo','$nrpart','$descrizione','$tragitto','$
 if(mysqli_query($db,$sql)) {
         
         echo '<script language="javascript">';
-        echo 'alert("ESCURZIONE INSERITA!"); location.href="escursione.html"';
+        echo 'alert("ESCURSIONE INSERITA!"); location.href="escursione.html"';
         echo '</script>';
 } else {
   

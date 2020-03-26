@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_POST['send_escursione'])) {
+if(isset($_POST['send_iscrizioneEscursione'])) {
 	$id=$_POST['id'];
 	$nome=$_SESSION['nome'];
 	

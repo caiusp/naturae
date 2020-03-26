@@ -17,6 +17,7 @@
     
     <div id="contenitore">
       <h1> LISTA ESCURSIONI ATTIVE  </h1><br>
+      <form class="" action="Iscrizioneescursione_Server.php" method="post">
 
       <div class="box1">
         <div class="box1a">
@@ -59,13 +60,7 @@
       ?>
       </div>
 
-
-        <form class="" action="Iscrizioneescursione_Server.php" method="post">
-
-        
-
-      
-      <input type="submit" name="send_escursione" value="Invia">
+      <input type="submit" name="send_iscrizioneEscursione" value="Invia">
     </form>
   </div>
 
