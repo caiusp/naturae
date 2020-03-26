@@ -16,7 +16,7 @@
         $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
 
         //get results from database
-        $result = mysqli_query($db,"SELECT nrProgr as ID,saldoAttuale as Raccolti,stato,importoObiettivo as totale,descrizione FROM campagnafondi");
+        $result = mysqli_query($db,"SELECT nrProgr as ID,saldoAttuale as Raccolti,Stato,importoObiettivo as Obiettivo,Descrizione FROM campagnafondi WHERE stato='APERTO'");
         $tabellacampagna = array();  //declare an array for saving habitat from the db
 
         //showing property
@@ -38,7 +38,7 @@
             }
         echo "</table>";
 
-        $result=mysqli_query($db,"SELECT nrProgr FROM campagnafondi");
+        $result=mysqli_query($db,"SELECT nrProgr FROM campagnafondi WHERE stato='APERTO'");
         //echo "seleziona campagna fondi";
 
         echo "Seleziona la campagna a cui sei interessato:";
