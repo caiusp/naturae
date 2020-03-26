@@ -18,7 +18,7 @@
         <input type="text" name="nome" placeholder="Mario" required>
         <br>
         <label>Anno di nascita: </label><br>
-        <input type="date" name="annoNascita"  placeholder="1980-12-01" required>
+        <input type="number" name="annoNascita"  placeholder="1980" required>
         <br>
 
         <label>Professione: </label><input list="works" name="professione" required>
