@@ -11,7 +11,7 @@
     <div id="contenitore">
       <h1>Avvistamento: </h1><br>
       <form class="" action="Avvistamento_Server.php" method="post">
-        <label>Data avvistamento: </label><input type="date" name="data" required ><br><br>
+        <label>Data avvistamento: </label><br><input type="date" name="data" required ><br>
         <label>Latitudine</label><br>
         <input type="number" name="latitudine" placeholder="43.961314" required><br>
         <label>Longitudine</label><br>
