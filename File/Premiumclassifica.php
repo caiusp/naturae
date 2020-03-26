@@ -17,7 +17,7 @@
 
      $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
      $nome=$_SESSION['nome'];
-     $result=mysqli_query($db,"SELECT ClassificazioniTotali,ClassificazioniCorrette,ClassificazioniErrate,Affidabilita FROM UTENTEPREMIUM WHERE nome=$nome");
+     $result=mysqli_query($db,"SELECT ClassificazioniTotali,ClassificazioniCorrette,ClassificazioniErrate,Affidabilita FROM UTENTEPREMIUM WHERE nome='$nome'");
       $tabella = array();  //declare an array for saving habitat from the db
 
         //showing property

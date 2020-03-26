@@ -65,8 +65,8 @@ h1{
 
 .contenitore1{
   position: fixed;
-   width: 350px;
-   height: 400px;
+   width: 1050px;
+   height: 200px;
    z-index: 20;
    top: 40%;
    left: 15%;
