@@ -2,20 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Escursioni disponibili</title>
+    <title>Utenti</title>
     <link rel="stylesheet" type="text/css" href="css/listautenti.css">
 
   </head>
   <body>
     <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
-
-
     <div id="contenitore">
       <h1>Lista degli utenti iscritti</h1><br>
-
-
-        <div class="testo">
- <?php
+      <form class="" action="listautenti_server.php" method="post">
+        
+      <?php
       
         $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
 
@@ -47,13 +44,12 @@
             }
         echo "</table>";
 
-      ?>
-
-        </div>
+      ?>  
 
 
-
+      </form>
       </div>
+
 
   </body>
 </html>

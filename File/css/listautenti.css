@@ -23,7 +23,7 @@ body, html{
 
 #contenitore{
   position: relative;
-   width: 400px;
+   width: 501px;
    height: 500px;
    z-index: 15;
    top: 10%;

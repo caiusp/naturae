@@ -105,7 +105,7 @@ if(isset($_SESSION['nome'])) {
 
     <div class="sidebar">
 
-  <a href="Listautenti.html"><i class="fa fa-cloud"></i> Utenti della community</a>
+  <a href="Listautenti.php"><i class="fa fa-cloud"></i> Utenti della community</a>
 
   <a href="Aggiornaprofilo.html"><i class="fa fa-fw fa-cog"></i> Aggiorna profilo</a>
 
