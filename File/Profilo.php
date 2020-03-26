@@ -123,6 +123,8 @@ if(isset($_SESSION['nome'])) {
   <a href="Escursione.php"><i class="fa fa-fw fa-trophy"></i>Crea escursione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti amministratori</b> </center></label><hr>
+  <a href="listaSpecieVegAn.php"><i class="fa fa-pagelines"></i> Schede vegetali e animali</a>
+  <a href="listaSchedeHabitat.php"><i class="fa fa-map-signs"></i> Schede habitat</a>
   <a href="inserisciSpecieVegetale.php"><i class="fa fa-fw fa-cog"></i>Nuova specie vegetale</a>
   <a href="inserisciSpecieAnimale.php"><i class="fa fa-fw fa-search"></i>Nuova specie animale</a>
   <a href="Paginahabitat.php"><i class="fa fa-snowflake-o"></i>  Nuovo habitat</a>
