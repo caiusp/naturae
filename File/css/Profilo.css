@@ -91,24 +91,6 @@ td{
 }
 
 
-input[type="search"]{
-  margin-left: 10px;
-  box-sizing: border-box;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 5px;
-  width: 70%;
-  display: inline-block;
-}
-input[name="invio"]{
-  border-radius: 5px;
-  height: 55%;
-  width: 20%;
-  box-sizing: border-box;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  display: inline-block;
-}
 a{
   line-height: 20px;
 }
