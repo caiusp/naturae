@@ -516,39 +516,7 @@ BEGIN
     END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 29: visualizza classifica utente (affidabilita)
-DELIMITER $
-CREATE PROCEDURE visualizzaClassificaAffidabilita()
-BEGIN
-		SELECT nome,affidabilita FROM UTENTEPREMIUM,CLASSIFICA WHERE UTENTEPREMIUM.idClassifica=CLASSIFICA.id ORDER BY affidabilita DESC; #serve per l'ordinamento DECRESCENTE
-END $
-DELIMITER ;
-#STORED PROCEDURE 30: visualizza classifica specie in base al numero di segnalazioni ricevute
-DELIMITER $
-CREATE PROCEDURE visualizzaClassificaSpecieSegnalazioni()
-BEGIN
-	CREATE VIEW contaSegnalazioniSpecie(nomeLatino, tot) AS (
-		SELECT SPECIE.nomeLatino, count(*) as tot
-        FROM SPECIE, AVVISTAMENTO
-        WHERE AVVISTAMENTO.nomeLatino=SPECIE.nomeLatino
-        GROUP BY SPECIE.nomeLatino
-        );
-	SELECT * FROM contaSegnalazioniSpecie ORDER BY tot DESC;
-END $
-DELIMITER ;
-#STORED PROCEDURE 31: visualizza classifica utenti più attivi
-DELIMITER $
-CREATE PROCEDURE visualizzaClassificaUtentiAttivi()
-BEGIN
-	CREATE VIEW contaSegnalazioniUtente(nome,tot) AS(
-		SELECT nome,count(*) AS tot
-		FROM UTENTE,AVVISTAMENTO
-		WHERE UTENTE.nome=AVVISTAMENTO.nomeUtente
-		GROUP BY nome
-	);
-	SELECT * FROM contaSegnalazioniUtente ORDER BY tot DESC;
-END $
-DELIMITER ;
+
 #popolamento db con dati utili
 call creaNuovaEscursione("Gita","20","Viaggio in danimarca","Italia-Danimarca","2020-01-01","9","18","PREMIUM"); 
 call creaNuovaEscursione("Mare","2","MAREEE","puglia","2020-01-01","9","18","PREMIUM"); 
