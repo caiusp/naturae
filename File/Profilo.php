@@ -112,14 +112,14 @@ if(isset($_SESSION['nome'])) {
 
   <a href="Messaggio.html"><i class="fa fa-fw fa-envelope"></i> Invia messaggio</a>
   <a href="Avvistamento.php"><i class="fa fa-binoculars"></i> Avvistamento</a>
-  <a href="ListaAvvistamenti.html"><i class="fa fa-camera"></i> Lista avvistamenti</a>
-  <a href="Classificamenuaffidabilita.html"><i class="fa fa-fw fa-sort"></i> Classifica</a>
+  <a href="ListaAvvistamenti.php"><i class="fa fa-camera"></i> Lista avvistamenti</a>
+  <a href="Classificamenuaffidabilita.php"><i class="fa fa-fw fa-sort"></i> Classifica</a>
   <a href="Iscrizioneescursione.html"><i class="fa fa-fw fa-flag"></i> Iscrizione escursione</a>
   <a href="fondi.php"><i class="fa fa-money"></i> Effettua donazione</a>
   <a href="Propostaclassificazione.html"><i class="fa fa-fw fa-bullhorn"></i> Proposta classificazione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti premium</b> </center></label><hr>
-  <a href="Premiumclassifica.html"><i class="fa fa-user-circle-o"></i> La tua classifica</a>
+  <a href="Premiumclassifica.php"><i class="fa fa-user-circle-o"></i> La tua classifica</a>
   <a href="Escursione.html"><i class="fa fa-fw fa-trophy"></i>Crea escursione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti amministratori</b> </center></label><hr>
