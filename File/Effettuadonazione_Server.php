@@ -14,12 +14,12 @@ $sql="CALL nuovaDonazione('$nome','$campagna','$importo','$note')";
 if(mysqli_query($db,$sql)) {
   		
   		echo '<script language="javascript">';
-        echo 'alert("DONAZIONE EFFETTUATA!"); location.href="effettuadonazione.html"';
+        echo 'alert("DONAZIONE EFFETTUATA!"); location.href="fondi.php"';
         echo '</script>';
 } else {
     		
   		echo '<script language="javascript">';
-        echo 'alert("PROBLEMA DONAZIONE EFFETTUATA!"); location.href="effettuadonazione.html"';
+        echo 'alert("PROBLEMA DONAZIONE EFFETTUATA!"); location.href="fondi.php"';
         echo '</script>';
       };
 }
