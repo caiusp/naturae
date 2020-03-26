@@ -112,6 +112,7 @@ if(isset($_SESSION['nome'])) {
 
   <a href="Messaggio.html"><i class="fa fa-fw fa-envelope"></i> Invia messaggio</a>
   <a href="Avvistamento.php"><i class="fa fa-binoculars"></i> Avvistamento</a>
+  <a href="ListaAvvistamenti.html"><i class="fa fa-camera"></i> Lista avvistamenti</a>
   <a href="Classificamenuaffidabilita.html"><i class="fa fa-fw fa-sort"></i> Classifica</a>
   <a href="Iscrizioneescursione.html"><i class="fa fa-fw fa-flag"></i> Iscrizione escursione</a>
   <a href="fondi.php"><i class="fa fa-money"></i> Effettua donazione</a>
