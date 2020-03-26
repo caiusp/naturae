@@ -15,16 +15,16 @@
   <body>
     <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
     
-    <div id="contenitoreEsc">
+    <div id="contenitore">
       <h1> LISTA ESCURSIONI ATTIVE  </h1><br>
 
-        <form class="" action="Iscrizioneescursione_Server.php" method="post">
-
-        <?php
+      <div class="box1">
+        <div class="box1a">
+          <?php
           
           $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
           //get results from database
-          $result = mysqli_query($db,"SELECT * FROM escursione WHERE stato='APERTO'");
+          $result = mysqli_query($db,"SELECT ID,Titolo,Descrizione,tragitto,data,orarioPartenza as Partenza, orarioRitorno as Ritorno FROM escursione WHERE stato='APERTO'");
           $tabellaescursione = array();  //declare an array for saving habitat from the db
 
           //showing property
@@ -46,6 +46,7 @@
               }
           echo "</table>";
 
+          echo "</div>";
           echo "<h1> ISCRIVITI ALL'ESCURSIONE!  </h1><br>";
 
           $results=mysqli_query($db,"SELECT id FROM escursione WHERE stato='APERTO'");
@@ -56,6 +57,12 @@
             }
           echo "</select>";
       ?>
+      </div>
+
+
+        <form class="" action="Iscrizioneescursione_Server.php" method="post">
+
+        
 
       
       <input type="submit" name="send_escursione" value="Invia">
