@@ -125,3 +125,13 @@ label{
 h1{
   font-size: 25px;
 }
+table{
+  width: 100%;
+  line-height: 30px;
+  text-align: center;
+
+}
+tr:first-child{
+  font-weight: bold;
+  text-align: center;
+}
