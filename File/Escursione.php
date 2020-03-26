@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
+if($_SESSION['tipoUtente']!="PREMIUM") {
+  echo "NON TI E' POSSIBILE ACCEDERE A QUESTA PAGINA";
+  header("location: Profilo.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+  
 if(isset($_POST['send_escursione'])) {
   $nome=$_SESSION['nome'];
   $titolo=$_POST['titolo'];

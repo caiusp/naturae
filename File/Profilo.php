@@ -120,18 +120,18 @@ if(isset($_SESSION['nome'])) {
 
   <label> <center> <b>Area riservata <br> solo agli utenti premium</b> </center></label><hr>
   <a href="Premiumclassifica.php"><i class="fa fa-user-circle-o"></i> La tua classifica</a>
-  <a href="Escursione.html"><i class="fa fa-fw fa-trophy"></i>Crea escursione</a><hr>
+  <a href="Escursione.php"><i class="fa fa-fw fa-trophy"></i>Crea escursione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti amministratori</b> </center></label><hr>
-  <a href="Specievegetale.html"><i class="fa fa-fw fa-cog"></i>Nuova specie vegetale</a>
-  <a href="Specieanimale.html"><i class="fa fa-fw fa-search"></i>Nuova specie animale</a>
-  <a href="Paginahabitat.html"><i class="fa fa-snowflake-o"></i>  Nuovo habitat</a>
-  <a href="Modificaspecieveg.html"><i class="fa fa-tree"></i> Modifica scheda vegetale</a>
-  <a href="Modificaspeciean.html"><i class="fa fa-linux"></i> Modifica scheda animale</a>
-  <a href="Modificaschedahabitat.html"><i class="fa fa-fw fa-flag"></i>Modifica scheda habitat</a>
-  <a href="Modificaclassificazione.html"><i class="fa fa-arrow-up"></i> Modifica classificazione</a>
-  <a href="Campagna.html"><i class="fa fa-fw fa-trophy"></i>Apri campagna</a>
-  <a href="Rimuovischeda.html"><i class="fa fa-trash"></i> Elimina scheda</a><br>
+  <a href="inserisciSpecieVegetale.php"><i class="fa fa-fw fa-cog"></i>Nuova specie vegetale</a>
+  <a href="inserisciSpecieAnimale.php"><i class="fa fa-fw fa-search"></i>Nuova specie animale</a>
+  <a href="Paginahabitat.php"><i class="fa fa-snowflake-o"></i>  Nuovo habitat</a>
+  <a href="Modificaspecieveg.php"><i class="fa fa-tree"></i> Modifica scheda vegetale</a>
+  <a href="Modificaspeciean.php"><i class="fa fa-linux"></i> Modifica scheda animale</a>
+  <a href="Modificaschedahabitat.php"><i class="fa fa-fw fa-flag"></i>Modifica scheda habitat</a>
+  <a href="Modificaclassificazione.php"><i class="fa fa-arrow-up"></i> Modifica classificazione</a>
+  <a href="Campagna.php"><i class="fa fa-fw fa-trophy"></i>Apri campagna</a>
+  <a href="Rimuovischeda.php"><i class="fa fa-trash"></i> Elimina scheda</a><br>
 
 
 

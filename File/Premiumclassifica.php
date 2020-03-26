@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
+if($_SESSION['tipoUtente']!="PREMIUM") {
+  echo "NON TI E' POSSIBILE ACCEDERE A QUESTA PAGINA";
+  header("location: Profilo.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -15,7 +22,6 @@
       <div class="contenitore1">
            <?php
 
-     $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
      $nome=$_SESSION['nome'];
      $result=mysqli_query($db,"SELECT ClassificazioniTotali,ClassificazioniCorrette,ClassificazioniErrate,Affidabilita FROM UTENTEPREMIUM WHERE nome='$nome'");
       $tabella = array();  //declare an array for saving habitat from the db
