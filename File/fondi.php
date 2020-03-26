@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Effettua donazione</title>
+  <link rel="stylesheet" type="text/css" href="css/Effettuadonazione.css">
+
+</head>
+<body>
+  <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
+
+
+  <div id="contenitore">
+    <h1>Effettua la tua donazione! </h1><br>
+    <form class="" action="Effettuadonazione_Server.php" method="post">
+
 <?php
 $host    = "localhost";
 $user    = "root";
@@ -39,27 +55,30 @@ while ($row = mysqli_fetch_array($result)) {
 echo "</table>";
 
 $result=mysqli_query($connection,"SELECT nrProgr FROM campagnafondi");
-echo "seleziona campagna fondi";
+//echo "seleziona campagna fondi";
+
+echo "Seleziona la campagna a cui sei interessato:";
 echo "<select name='campagna'>";
 while($riga=mysqli_fetch_array($result)){
 echo "<option>".$riga["nrProgr"]."</option>";
 }
 echo "</select>";
 
-
-// $query="SELECT stato FROM campagnafondi";
-// $stato = mysqli_query($connection,$query);
-
-// $statoCampagna = "APERTO";
-// while($rows = mysqli_fetch_array($stato)){
-//   echo "lo stato della campagna e' ".$rows[0];
-// }
-
-// if (strcasecmp($statoCampagna, $rows) == 0) {
-//     echo "Le stringhe sono uguali";
-// } else {
-//     echo "Le stringhe non coincidono";
-// }
-
-
 ?>
+
+    
+
+
+
+    <label>Importo:</label><input type="number" name="importo"><label> €</label><br>
+    <label for="note">Note: </label><br>
+    <textarea name="note" rows="8" cols="50" maxlength="50"></textarea><br>
+
+
+
+    <input type="submit" name="send_donazione" value="Invia">
+  </form>
+</div>
+
+</body>
+</html>
