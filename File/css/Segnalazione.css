@@ -25,7 +25,7 @@ body, html{
    width: 400px;
    height: 450px;
    z-index: 15;
-   top: 20%;
+   margin-top: 10%;
 
    margin-left: auto;
    margin-right: auto;
@@ -69,7 +69,9 @@ input[type="file"]{
 
 
 input[type="date"]{
+  width: 100%;
   box-sizing: border-box;
   padding: 5px 5px;
+  margin-bottom: 5px;
 
 }
