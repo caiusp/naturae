@@ -1,7 +1,3 @@
-    <?php
-    $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
-    ?>
-
     <!DOCTYPE html>
     <html lang="en" dir="ltr">
     <head>
@@ -18,7 +14,8 @@
                 <h1>Lista schede Vegetali: </h1><br>
                 <div class="cont1a">
 
-                    <?php
+                <?php
+                    $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
                     $listaveg = mysqli_query($db,"SELECT * FROM specievegetale");
                     $all_vegetali = array();
 
@@ -40,7 +37,7 @@
                     }
                     echo "</table>";
 
-                    ?>
+                ?>
 
 
 </div>

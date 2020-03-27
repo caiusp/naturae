@@ -12,31 +12,32 @@
       <h1>Lista schede habitat: </h1><br>
         <div class="testo">
 
+          <?php
+            $db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
+            $listahabitat = mysqli_query($db,"SELECT Nome,Descrizione FROM habitat");
+            $all_habit = array();
 
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
-          <p>campagna</p>
+            echo '<table class="data-table">
+            <tr class="data-heading">';  
+            while ($habitat = mysqli_fetch_field($listahabitat)) {
+              echo '<td>' . $habitat->name . '</td>';  //printa nomelatino
+                array_push($all_habit, $habitat->name);
+              }
+              echo '</tr>';
+
+              //showing all data
+            while ($row = mysqli_fetch_array($listahabitat)) {
+              echo "<tr>";
+              foreach ($all_habit as $item) {
+                echo '<td>' . $row[$item] . '</td>'; //get items using property value
+                }
+                    echo '</tr>';
+              }
+                  echo "</table>";
+
+            ?>
+
+          
 
         </div>
 
