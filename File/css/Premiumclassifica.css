@@ -4,9 +4,12 @@
 
 
 }
-body{
-  width: 100%;
+body, html{
+  height: 100%;
   margin: 0;
+
+}
+body{
   background-image: url(https://www.nicepng.com/png/detail/46-468209_tall-grass-nature-transparent-background-grass-png.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -15,112 +18,61 @@ body{
 
 
 
-.col1{
-
-  margin: 0;
-  overflow: hidden;
-  height: 800px;
-  float: left;
-  width: 33.33%;
-  background-color: transparent;
-  text-align: center;
-
-}
-
-.col2{
-    margin: 0;
-    overflow: hidden;
-    height: 800px;
-    float: left;
-    width: 33.33%;
-    background-color: transparent;
-    text-align: center;
-
-
-}
-.col3{
-
-    margin: 0;
-    overflow: hidden;
-    height: 800px;
-    float: left;
-    width: 33.33%;
-    background-color: transparent;
-    text-align: center;
-
-}
 
 h1{
   font-size: 20px;
 }
 
-#valorecl{
-  top: 5%;
-  text-align: center;
-  font-size: 100px;
-  font-weight: bold;
-}
 
 
 
 .contenitore1{
-  position: fixed;
-   width: 1050px;
-   height: 200px;
-   z-index: 20;
-   top: 40%;
-   left: 15%;
-   margin: -130px 0 0 -170px;
-
-    background-color: lightgrey;
-    border: 2px solid black;
-    border-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-
-
-
-.contenitore2{
-  position: fixed;
-   width: 350px;
+  position: relative;
+   width: 800px;
    height: 400px;
    z-index: 20;
-   top: 40%;
-   left: 50%;
-   margin: -130px 0 0 -170px;
+   top: 20%;
+
+   margin-left: auto;
+   margin-right: auto;
 
     background-color: lightgrey;
     border: 2px solid black;
     border-radius: 20px;
     padding-left: 20px;
     padding-right: 20px;
-
-}
-.contenitore3{
-  position: fixed;
-   width: 350px;
-   height: 400px;
-   z-index: 20;
-   top: 40%;
-   left: 83%;
-   margin: -130px 0 0 -170px;
-
-    background-color: lightgrey;
-    border: 2px solid black;
-    border-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-}
-
-.col1 input[type="button"]{
-  margin-left: 10px;
 }
 
 .top{
-  z-index: 40;
-  text-align: left;
+  float: left;
+  margin-top: 0;
+  margin-left: 0;
 
+}
+
+table{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+}
+
+tr:first-child{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+tr:nth-child(2){
+  font-size: 100px;
+  font-weight: bolder;
+  height: 450px;
+  vertical-align: middle;
+}
+tr{
+  border-right: 2px solid black;
+
+}
+td:last-child{
+  border: none;
 }
