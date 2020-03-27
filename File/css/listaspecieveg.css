@@ -106,3 +106,15 @@ body, html{
 input[value="Torna alla home"]{
   float: left;
 }
+
+table{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  line-height: 30px;
+}
+
+tr:first-child{
+  font-weight: bold;
+}
