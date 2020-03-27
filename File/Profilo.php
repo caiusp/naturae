@@ -1,30 +1,6 @@
 <?php
 
 session_start();
-/*
-$db=mysqli_connect('localhost','root','Nico1998','progetto') or die("Impossibile connettersi al database");
-
-       $sql="SELECT * FROM UTENTE WHERE nome=_SESSION['nome'];";
-        $risultati=mysqli_query($db,$sql);
-        $controlloRisultati=mysqli_num_rows($risultati);
-        if ($controlloRisultati>0) {
-          while ($row=mysqli_fetch_assoc($risultati)) {
-            echo $row['email'];
-          }
-        }
-*/
-
-/*
-if(isset($_SESSION['nome'])) {
-  $_SESSION['msg']="Dovresti prima fare il log in per vedere questa pagina";
-  header("location : index.php");
-} 
-*/
-/*if(isset($_GET['logout'])){
-  session_destroy();
-  unset($_SESSION['nome']);
-  header("location : index.php");
-}*/
 
 ?>
 <!DOCTYPE html>
@@ -106,7 +82,8 @@ if(isset($_SESSION['nome'])) {
     <div class="sidebar">
 
   <a href="Listautenti.php"><i class="fa fa-cloud"></i> Utenti della community</a>
-
+  <a href="listaSpecieVegAn.php"><i class="fa fa-pagelines"></i> Schede vegetali e animali</a>
+  <a href="listaSchedeHabitat.php"><i class="fa fa-map-signs"></i> Schede habitat</a>
   <a href="Aggiornaprofilo.html"><i class="fa fa-fw fa-cog"></i> Aggiorna profilo</a>
 
 
@@ -123,8 +100,6 @@ if(isset($_SESSION['nome'])) {
   <a href="Escursione.php"><i class="fa fa-fw fa-trophy"></i>Crea escursione</a><hr>
 
   <label> <center> <b>Area riservata <br> solo agli utenti amministratori</b> </center></label><hr>
-  <a href="listaSpecieVegAn.php"><i class="fa fa-pagelines"></i> Schede vegetali e animali</a>
-  <a href="listaSchedeHabitat.php"><i class="fa fa-map-signs"></i> Schede habitat</a>
   <a href="inserisciSpecieVegetale.php"><i class="fa fa-fw fa-cog"></i>Nuova specie vegetale</a>
   <a href="inserisciSpecieAnimale.php"><i class="fa fa-fw fa-search"></i>Nuova specie animale</a>
   <a href="Paginahabitat.php"><i class="fa fa-snowflake-o"></i>  Nuovo habitat</a>
