@@ -1,3 +1,9 @@
+body, html{
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 body{
   background-image: url(https://www.lifegate.it/app/uploads/fox-1883658_1280-e1547217795989.jpg);
   background-position: center;
@@ -16,10 +22,7 @@ h1{
   font-size: 20px;
   text-decoration: underline;
 }
-body, html{
-  height: 100%;
-  margin: 0;
-}
+
 #dati{
   position: relative;
   margin: auto;
@@ -29,6 +32,8 @@ body, html{
   border-radius: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 10%;
+
 }
 input{
   border-radius: 5px;
@@ -50,30 +55,11 @@ label{
   margin-bottom: 20px;
 }
 #inserimento{
-  position: fixed;
+  float: left;
   width: 20%;
+  margin-top: 0;
 
 }
 #inserimento input[type="submit"]{
   padding-right: 10px;
-}
-
-#cerca input[type="search"]{
-  width: 80%;
-  margin: 8px 0;
-  box-sizing: border-box;
-  padding: 8px 8px;
-}
-#cerca input[type="submit"]{
-  padding-right: 5px;
-}
-
-#cerca{
-  float: right;
-  margin-top: 5px;
-  background-color: lightgrey;
-  width: 20%;
-  padding-left: 20px;
-  padding-right: 10px;
-
 }
