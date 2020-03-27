@@ -14,7 +14,7 @@ if($_SESSION['tipoUtente']!="PREMIUM") {
     <link rel="stylesheet" type="text/css" href="css/Premiumclassifica.css">
   </head>
   <body>
-    <div class="col1">
+    
       <div class="top">
         <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
       </div>
@@ -49,7 +49,6 @@ if($_SESSION['tipoUtente']!="PREMIUM") {
 
     </div>
     
-  </div>
 
 
 
