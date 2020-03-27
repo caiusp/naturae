@@ -19,17 +19,7 @@ if($_SESSION['tipoUtente']!="AMMINISTRATORE") {
     <div id="inserimento">
       <input type="button" onclick="location.href='Profilo.php'" value="Torna alla home"/>
     </div>
-    <div id="cerca">
-      <form class="" action="" method="post">
-        <input type="search" name="cerca" placeholder="Cerca scheda animale">
-        <input type="submit" name="invio" value="Invia">
-      </form>
-
-
-    </div>
-
-
-
+    
     <div id="dati">
 
 
