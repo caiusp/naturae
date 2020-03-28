@@ -1,4 +1,4 @@
-/* progetto basi di dati NICOLO' CINELLI */
+# progetto basi di dati di NICOLO' CINELLI, GIACOMO PAZZAGLIA E ALESSANDRA MOSCHETTA 
 DROP DATABASE IF EXISTS PROGETTO;
 CREATE DATABASE IF NOT EXISTS PROGETTO;
 USE PROGETTO;
@@ -198,6 +198,7 @@ INSERT INTO OSPITA VALUES("Chionomys nivalis","Foresta di conifere");
 #inserimento utente admin
 INSERT INTO UTENTE VALUES("ADMIN","GESTORE",null,"0",2020,"admin@admin.com","ADMIN","AMMINISTRATORE");
 INSERT INTO UTENTEAMMINISTRATORE VALUES ("ADMIN");
+#inserimento utente premium
 INSERT INTO UTENTE VALUES("PREMIUM","PREMIUM",null,"0",2020,"premium@premium.com","PREMIUM","PREMIUM");
 INSERT INTO UTENTEPREMIUM VALUES ("PREMIUM","0","0","0","0");
 
@@ -252,7 +253,7 @@ DELIMITER ;
 #TRIGGER 3: Chiude l'escursione appena si raggiunge il numero max
 #dei partecipanti
 DELIMITER $
-CREATE TRIGGER chiudiEscursione # SEMBRA CORRETTA MA NON CHIUDE 
+CREATE TRIGGER chiudiEscursione 
 AFTER INSERT ON ISCRIZIONE
 FOR EACH ROW 
 BEGIN 
@@ -497,34 +498,40 @@ DELIMITER ;
 
 #popolamento db con dati utili
 call creaNuovaEscursione("Gita","20","Viaggio in danimarca","Italia-Danimarca","2020-01-01","9","18","PREMIUM"); 
-call creaNuovaEscursione("Mare","2","MAREEE","puglia","2020-01-01","9","18","PREMIUM"); 
+call creaNuovaEscursione("Mare","2","MAREEE","Puglia","2020-01-01","9","18","PREMIUM"); 
 call creaNuovoAvvistamento("ADMIN","2020-01-01","1223","2344",null,"Laguna");
-call nuovoMessaggio(current_date,"ADMIN","ADMIN","Bella","T'appost");
-call nuovoMessaggio(current_date,"PREMIUM","ADMIN","Bella","T'appost");
+call nuovoMessaggio(current_date,"ADMIN","PREMIUM","Lavoro","Ciao! Ho risolto quel problema su cui eravamo bloccati, chiamami appena puoi.");
+call nuovoMessaggio(current_date,"PREMIUM","ADMIN","Disponibilit'","Ho letto adesso il messaggio! Sarò disponibile dalle 13 alle 13:45 per la pausa pranzo, sentiamoci in quella fascia oraria.");
 call creaNuovaCampagna("5000","CORONAVIRUS","2020-01-01","ADMIN");
 call creaNuovaCampagna("3000","RISTRUTTURAZIONE CHIESA","2020-01-01","ADMIN");
-call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
-call nuovaSpecieAnimale(current_date,"ADMIN","brooo","frate","mallared","","Minimo","1999","30","40","2");
-call nuovaSpecieVegetale(current_date,"ADMIN","braaa","frate","mallared","","Minimo","1999","30","40");
-call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/Maremma");
-call creaNuovoUtenteSemplice("paz","1997","Calciatore","puz@gmail.com","123","");
-call creaNuovoUtenteSemplice("piz","1997","Calciatore","puz@gmail.com","123","");
-call creaNuovoUtenteSemplice("puz","1997","Calciatore","puz@gmail.com","123","");
-call creaNuovoUtenteSemplice("poz","1997","Calciatore","puz@gmail.com","123","");
-call creaNuovoAvvistamento("piz","2020-01-01","123","2344",null,"Laguna");
-call creaNuovoAvvistamento("piz","2020-01-01","122","2344",null,"Laguna");
-call creaNuovoAvvistamento("piz","2020-01-01","223","2344",null,"Laguna");
+call nuovaDonazione("ADMIN","1","70","Ce la faremo!");
+call nuovaSpecieAnimale(current_date,"ADMIN","Vipera ammodytes","Vipera dal corno","REPTILIA","https://en.wikipedia.org/wiki/Vipera_ammodytes","Critico","1758","","60","");
+call nuovaSpecieAnimale(current_date,"ADMIN","Vipera ursinii","Vipera dell'Orsini","REPTILIA","https://en.wikipedia.org/wiki/Vipera_ursinii","Critico","1835","","75","");
+call nuovaSpecieVegetale(current_date,"ADMIN","Ophrys pallida","Ofride Pallida","Liliopside","https://it.wikipedia.org/wiki/Ophrys_pallida","Basso","1810","17","3");
+call nuovoHabitat(current_date,"ADMIN","Palude","https://it.wikipedia.org/wiki/Palude");
+call creaNuovoUtenteSemplice("Fabrizio","1997","Calciatore","fabrizio@gmail.com","123","");
+call creaNuovoUtenteSemplice("Roberto","1998","Giornalista","roberto@gmail.com","123","");
+call creaNuovoUtenteSemplice("Marco","1992","Ingegnere Informatico","marco@gmail.com","123","");
+call creaNuovoUtenteSemplice("Luca","1996","Astronauta","luca@gmail.com","123","");
+call creaNuovoAvvistamento("Roberto","2020-01-01","123","2344",null,"Lago");
+call creaNuovoAvvistamento("Roberto","2020-01-01","122","2344",null,"Laguna");
+call creaNuovoAvvistamento("Roberto","2020-01-01","223","2344",null,"Palude");
 call iscrizioneEscursione("1","ADMIN");
-call creaNuovaProposta("1","dajeeee!","ADMIN","brooo");
-call creaNuovaProposta("1","dajeeee!","PREMIUM","brooo");
-call creaNuovaProposta("1","dajeeee!","puz","braaa");
-call creaNuovaProposta("1","dajeeee!","poz","braaa");
-call creaNuovaProposta("1","dajeeee!","piz","braaa");
+call creaNuovaProposta("1","Credo sia corretta!","ADMIN","Vipera ammodytes");
+call creaNuovaProposta("1","Credo sia corretta!!","PREMIUM","Vipera ursinii");
+call creaNuovaProposta("1","Credo sia corretta!!","Marco","Vipera ammodytes");
+call creaNuovaProposta("1","Credo sia corretta!!","Luca","Vipera ammodytes");
+call creaNuovaProposta("1","Credo sia corretta!!","Roberto","Vipera ursinii");
+#
+call creaNuovaProposta("2","Credo sia corretta!","ADMIN","Vipera ammodytes");
+call creaNuovaProposta("2","Credo sia corretta!!","PREMIUM","Vipera ursinii");
+call creaNuovaProposta("2","Credo sia corretta!!","Marco","Vipera ammodytes");
+call creaNuovaProposta("2","Credo sia corretta!!","Luca","Vipera ammodytes");
+call creaNuovaProposta("2","Credo sia corretta!!","Roberto","Vipera ursinii");
 call nuovaDonazione("PREMIUM","1","30","dai dai");
 call nuovaDonazione("ADMIN","1","30","dai dai");
-call nuovaDonazione("puz","1","4870","CON QUESTA DONAZIONE VINCIAMO!");
-call nuovaDonazione("piz","2","45","dai dai");
+call nuovaDonazione("Marco","1","4870","CON QUESTA DONAZIONE VINCIAMO!");
+call nuovaDonazione("Roberto","2","45","dai dai");
 call iscrizioneEscursione("1","puz");
 call iscrizioneEscursione("2","puz");
-call iscrizioneEscursione("8","puz");
-call correggiClassificazione("1","brooo");
+call correggiClassificazione("1","Hystrix cristata");
