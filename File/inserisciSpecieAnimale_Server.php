@@ -1,6 +1,19 @@
 <?php
 session_start();
 
+try {
+     $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+     $bulk = new MongoDB\Driver\BulkWrite();
+     if($_POST){
+       $doc = ['_id' => new MongoDB\BSON\ObjectID(),'nome'=>$_SESSION['nome'], 'timestamp'=>$_POST['timestamp'], 'nomeLatino'=>$_POST['nomelat'], 'nomeItaliano'=>$_POST['nomeita'], 'classe'=>$_POST['classe'], 'wikipedia'=>$_POST['wiki'], 'vulnerabilita'=>$_POST['vulnerabilita'], 'anno'=>$_POST['anno'], 'peso'=>$_POST['peso'], 'altezza'=>$_POST['altezza'], 'prole'=>$_POST['prole'], 'azione' => 'Nuova specie animale'];
+
+     $bulk->insert($doc);
+     $mng->executeBulkWrite('Naturae.nat', $bulk);
+   }
+     } catch (MongoDB\Driver\Exception\Exception $e) {
+    echo("Codice  errore".$e->getMessage()."<br>");
+	}
+
 if(isset($_POST['send_specieanimale'])) {
   $timestamp=date("Y-m-d H:i:s");
   $nome=$_SESSION['nome'];
