@@ -1,6 +1,19 @@
 <?php
 session_start();
 
+try {
+     $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+     $bulk = new MongoDB\Driver\BulkWrite();
+     if($_POST){
+       $doc = ['_id' => new MongoDB\BSON\ObjectID(),'nome'=>$_SESSION['nome'], 'data'=>$_POST['data'], 'descrizione'=>$_POST['descrizione'], 'importo'=>$_POST['importo'], 'azione' => 'Nuova campagna aperta'];
+
+     $bulk->insert($doc);
+     $mng->executeBulkWrite('Naturae.nat', $bulk);
+   }
+     } catch (MongoDB\Driver\Exception\Exception $e) {
+    echo("Codice  errore".$e->getMessage()."<br>");
+	}
+
 if(isset($_POST['send_campagna'])) {
   $nome=$_SESSION['nome'];
   $data=$_POST['data'];
