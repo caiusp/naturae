@@ -21,6 +21,7 @@ if(isset($_POST['nome'])) {
       $_SESSION['annoNascita']=$row['annoNascita'];
       $_SESSION['professione']=$row['professione'];
       $_SESSION['tipoUtente']=$row['tipoUtente'];
+      $_SESSION['foto']=$row['foto'];
     }
   }
   else {

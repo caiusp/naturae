@@ -2,6 +2,7 @@
 DROP DATABASE IF EXISTS PROGETTO;
 CREATE DATABASE IF NOT EXISTS PROGETTO;
 USE PROGETTO;
+
 #creazione delle tabelle
 CREATE TABLE SPECIE(
 	classe VARCHAR(200),
@@ -133,8 +134,8 @@ CREATE TABLE AVVISTAMENTO(
 	codice INT AUTO_INCREMENT PRIMARY KEY,
     nomeUtente VARCHAR(200),
     data DATE,
-    latitudine INT,
-    longitudine INT, 
+    latitudine FLOAT,
+    longitudine FLOAT, 
     foto blob,
     nomeHabitat VARCHAR(200),
     nomeLatino VARCHAR(200),
@@ -294,7 +295,7 @@ BEGIN
 END $
 DELIMITER ;
 
-#STORED PROCEDURE 5: creo nuovo utente semplice
+#STORED PROCEDURE 1: creo nuovo utente semplice
 DELIMITER $
 CREATE PROCEDURE creaNuovoUtenteSemplice(IN nomeU VARCHAR(30), IN annoNascitaU INT, IN professioneU VARCHAR(30), IN emailU VARCHAR(20), IN passwordU VARCHAR(20), IN fotoU BLOB)
 BEGIN
@@ -302,7 +303,7 @@ BEGIN
     INSERT INTO UTENTESEMPLICE(nome) VALUES(nomeU);
 END $
 DELIMITER ;
-#STORED PROCEDURE 7: creo nuovo utente amministratore
+#STORED PROCEDURE 2: creo nuovo utente amministratore
 DELIMITER $
 CREATE PROCEDURE creaNuovoUtenteAmministratore(IN nomeU VARCHAR(30), IN professioneU VARCHAR(20), IN fotoU BLOB, IN annoNascitaU INT, IN emailU VARCHAR(20), IN passwordU VARCHAR(20))
 BEGIN
@@ -310,14 +311,14 @@ BEGIN
     INSERT INTO UTENTEAMMINISTRATORE(nome) VALUES(nomeU);
 END $
 DELIMITER ;
-#STORED PROCEDURE : aggiorno il profilo dell'utente
+#STORED PROCEDURE 3: aggiorno il profilo dell'utente
 DELIMITER $
 CREATE PROCEDURE aggiornaProfilo(IN nomeU VARCHAR(200),IN emailU VARCHAR(200),IN professioneU VARCHAR(200))
 BEGIN
 	UPDATE UTENTE SET email=emailU, professione=professioneU WHERE nome=nomeU;
 END $
 DELIMITER ;
-#STORED PROCEDURE 9: creo nuovo avvistamento
+#STORED PROCEDURE 4: creo nuovo avvistamento
 DELIMITER $
 CREATE PROCEDURE creaNuovoAvvistamento(IN nomeUtenteA VARCHAR(20),IN dataA DATE, IN latitudineA INT, IN longitudineA INT,IN fotoA BLOB, IN nomeHabitatA VARCHAR(20))
 BEGIN
@@ -325,7 +326,7 @@ BEGIN
 	INSERT INTO AVVISTAMENTO(nomeUtente,data,latitudine,longitudine,foto,nomeHabitat) VALUES (nomeUtenteA,dataA,latitudineA,longitudineA,fotoA,nomeHabitatA);
 END $
 DELIMITER ;
-#STORED PROCEDURE 10: creo nuova proposta
+#STORED PROCEDURE 5: creo nuova proposta
 DELIMITER $
 CREATE PROCEDURE creaNuovaProposta(IN codiceAvvistamentoP INT,commentoP VARCHAR(50), nomeUtenteP VARCHAR(30), nomeLatinoP VARCHAR(30))
 BEGIN 
@@ -336,7 +337,7 @@ BEGIN
     END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 11: creo nuova escursione
+#STORED PROCEDURE 6: creo nuova escursione
 DELIMITER $
 CREATE PROCEDURE creaNuovaEscursione(IN titoloE VARCHAR(20),IN nMaxPartecipantiE INT,IN descrizioneE VARCHAR(200),IN tragittoE VARCHAR(200),IN dataE DATE,IN orarioPartenzaE INT,IN orarioRitornoE INT,IN nomeCreatoreEscursioneE VARCHAR(20))
 BEGIN
@@ -345,7 +346,7 @@ BEGIN
     COMMIT;
 END $
 DELIMITER ;
-#STORED PROCEDURE 12: nuova campagna fondi
+#STORED PROCEDURE 7: nuova campagna fondi
 DELIMITER $
 CREATE PROCEDURE creaNuovaCampagna(IN importoObiettivoC INT,IN descrizioneC VARCHAR(150),IN dataInizioC DATE,IN nomeFondatoreC VARCHAR(200))
 BEGIN
@@ -354,7 +355,7 @@ BEGIN
     COMMIT;
 END $
 DELIMITER ;
-#STORED PROCEDURE 13: nuovo messaggio
+#STORED PROCEDURE 8: nuovo messaggio
 DELIMITER $
 CREATE PROCEDURE nuovoMessaggio(IN timestampM TIMESTAMP,IN nomeMittenteM VARCHAR(200),IN nomeRiceventeM VARCHAR(200),IN titoloM VARCHAR(200),IN testoM VARCHAR(300))
 BEGIN
@@ -365,7 +366,7 @@ BEGIN
 		END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 14: nuova donazione
+#STORED PROCEDURE 9: nuova donazione
 DELIMITER $
 CREATE PROCEDURE nuovaDonazione(IN nomeUtenteD VARCHAR(20),IN nrProgrCampagnaFondiD INT,IN importoD INT,IN noteD VARCHAR(50))
 BEGIN
@@ -377,30 +378,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 15: visualizza escursioni
-DELIMITER $
-CREATE PROCEDURE visualizzaEscursioni()
-BEGIN
-	SELECT * FROM ESCURSIONI WHERE stato="APERTO";
-END $
-DELIMITER ;
-#STORED PROCEDURE 16: visualizza campagne fondi
-DELIMITER $
-CREATE PROCEDURE visualizzaCampagne()
-BEGIN
-	SELECT * FROM CAMPAGNAFONDI WHERE stato="APERTO";
-END $
-DELIMITER ;
-#STORED PROCEDURE 17: visualizza dati utente
-DELIMITER $
-CREATE PROCEDURE visualizzaUtente(IN nomeU VARCHAR(20))
-BEGIN
-	IF EXISTS(SELECT nome FROM UTENTE WHERE UTENTE.nome=nomeU) THEN
-		SELECT * FROM UTENTE WHERE UTENTE.nome=nomeU;
-	END IF;
-END $
-DELIMITER ;
-#STORED PRCEDURE 18: iscrizione Escursione
+#STORED PRCEDURE 10: iscrizione Escursione
 DELIMITER $
 CREATE PROCEDURE iscrizioneEscursione(IN idE INT,IN nomeUtenteE VARCHAR(20))
 BEGIN
@@ -410,7 +388,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 19: nuova specie animale (ADMIN)
+#STORED PROCEDURE 11: nuova specie animale (ADMIN)
 DELIMITER $
 CREATE PROCEDURE nuovaSpecieAnimale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoS VARCHAR(200),IN nomeItalianoS VARCHAR(200),IN classeS VARCHAR(200),IN linkWikipediaS VARCHAR(200),IN livelloVulnerabilitaS VARCHAR(200),IN annoClassificazioneS INT,IN pesoS INT,IN altezzaS INT,IN proleMediaS INT)
 BEGIN
@@ -419,7 +397,7 @@ BEGIN
     INSERT INTO MODIFICASPECIE(timestamp, nomeLatinoSpecie, nomeAmministratore) VALUES (timestampS, nomeLatinoS, nomeAmministratoreS);
 END $
 DELIMITER ;
-#STORED PROCEDURE 20: aggiorna specie animale (ADMIN)
+#STORED PROCEDURE 12: aggiorna specie animale (ADMIN)
 DELIMITER $
 CREATE PROCEDURE aggiornaSpecieAnimale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoX VARCHAR(30),IN pesoX INT, IN altezzaX INT, IN proleMediaX INT)
 BEGIN 
@@ -429,7 +407,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 21: rimuovi specie animale (ADMIN)
+#STORED PROCEDURE 13: rimuovi specie animale (ADMIN)
 DELIMITER $
 CREATE PROCEDURE rimuoviSpecieAnimale(IN timestampx TIMESTAMP, IN nomeAmministratorex VARCHAR(200),IN nomeLatinox VARCHAR(200))
 BEGIN
@@ -444,7 +422,7 @@ BEGIN
   
 END $
 DELIMITER ;
-#STORED PROCEDURE 22: nuova specie vegetale (ADMIN)
+#STORED PROCEDURE 14: nuova specie vegetale (ADMIN)
 DELIMITER $
 CREATE PROCEDURE nuovaSpecieVegetale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoS VARCHAR(30),IN nomeItalianoS VARCHAR(30),IN classeS VARCHAR(20),IN linkWikipediaS VARCHAR(100),IN livelloVulnerabilitaS VARCHAR(20),IN annoClassificazioneS INT,IN lunghezzaS INT,IN diametroS INT)
 BEGIN
@@ -453,7 +431,7 @@ BEGIN
 	INSERT INTO MODIFICASPECIE(timestamp, nomeLatinoSpecie, nomeAmministratore) VALUES (timestampS, nomeLatinoS, nomeAmministratoreS);
 END $
 DELIMITER ;
-#STORED PROCEDURE 23: aggiorna specie vegetale (ADMIN)
+#STORED PROCEDURE 15: aggiorna specie vegetale (ADMIN)
 DELIMITER $
 CREATE PROCEDURE aggiornaSpecieVegetale(IN timestampS TIMESTAMP, IN nomeAmministratoreS VARCHAR(200),IN nomeLatinoX VARCHAR(30),IN lunghezzaX INT, IN diametroX INT)
 BEGIN 
@@ -463,7 +441,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 24: rimuovi specie vegetale (ADMIN)
+#STORED PROCEDURE 16: rimuovi specie vegetale (ADMIN)
 DELIMITER $
 CREATE PROCEDURE rimuoviSpecieVegetale(IN timestampx timestamp, IN nomeAmministratorex VARCHAR(200),IN nomeLatinox VARCHAR(30))
 BEGIN
@@ -476,7 +454,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 25: nuovo habitat (ADMIN)
+#STORED PROCEDURE 17: nuovo habitat (ADMIN)
 DELIMITER $
 CREATE PROCEDURE nuovoHabitat(IN timestampH timestamp, IN nomeAmministratoreH VARCHAR(200), IN nomeH VARCHAR(30), IN descrizioneH VARCHAR(100))
 BEGIN
@@ -484,7 +462,7 @@ BEGIN
     INSERT INTO MODIFICAHABITAT(timestamp, nomeHabitat, nomeAmministratore) VALUES (timestampH, nomeH, nomeAmministratoreH);
 END $
 DELIMITER ;
-#STORED PROCEDURE 26: aggiorna habitat (ADMIN)
+#STORED PROCEDURE 18: aggiorna habitat (ADMIN)
 DELIMITER $
 CREATE PROCEDURE aggiornaHabitat(IN timestampH timestamp, IN nomeAmministratoreH VARCHAR(200),IN nomeH VARCHAR(30), IN descrizioneH VARCHAR(100))
 BEGIN
@@ -494,7 +472,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 27: rimuovi habitat (ADMIN)
+#STORED PROCEDURE 19: rimuovi habitat (ADMIN)
 DELIMITER $
 CREATE PROCEDURE rimuoviHabitat(IN timestampH timestamp, IN nomeAmministratoreH VARCHAR(200),IN nomeH VARCHAR(30))
 BEGIN
@@ -505,7 +483,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-#STORED PROCEDURE 28: correggere manualmente una classificazione (SOLO admin)
+#STORED PROCEDURE 20: correggere manualmente una classificazione (SOLO admin)
 DELIMITER $
 CREATE PROCEDURE correggiClassificazione(IN codiceX INT,IN nomeLatinoX VARCHAR(30))
 BEGIN
@@ -529,12 +507,6 @@ call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
 call nuovaSpecieAnimale(current_date,"ADMIN","brooo","frate","mallared","","Minimo","1999","30","40","2");
 call nuovaSpecieVegetale(current_date,"ADMIN","braaa","frate","mallared","","Minimo","1999","30","40");
 call nuovoHabitat(current_date,"ADMIN","Maremma","https://it.wikipedia.org/wiki/Maremma");
-#INSERT INTO AVVISTAMENTO VALUES (null,"ADMIN","2020-01-01","111111","22222",null,"Lago",null);
-#call aggiornaSpecieVegetale(current_date,"ADMIN","braaa","90","90");
-#call rimuoviSpecieAnimale(current_date,"ADMIN","brooo");
-#call rimuoviSpecieVegetale(current_date,"ADMIN","Galanthus nivalis");
-#call rimuoviHabitat(current_date,"ADMIN","Lago");
-#call aggiornaProfilo("ADMIN","fabio@ciao.com","Avvocato");
 call creaNuovoUtenteSemplice("paz","1997","Calciatore","puz@gmail.com","123","");
 call creaNuovoUtenteSemplice("piz","1997","Calciatore","puz@gmail.com","123","");
 call creaNuovoUtenteSemplice("puz","1997","Calciatore","puz@gmail.com","123","");
@@ -543,11 +515,9 @@ call creaNuovoAvvistamento("piz","2020-01-01","123","2344",null,"Laguna");
 call creaNuovoAvvistamento("piz","2020-01-01","122","2344",null,"Laguna");
 call creaNuovoAvvistamento("piz","2020-01-01","223","2344",null,"Laguna");
 call iscrizioneEscursione("1","ADMIN");
-#call nuovaDonazione("ADMIN","1","70","ce la faremoooooo");
 call creaNuovaProposta("1","dajeeee!","ADMIN","brooo");
 call creaNuovaProposta("1","dajeeee!","PREMIUM","brooo");
 call creaNuovaProposta("1","dajeeee!","puz","braaa");
-#call creaNuovaProposta("1","dajeeee!","paz","brooo");
 call creaNuovaProposta("1","dajeeee!","poz","braaa");
 call creaNuovaProposta("1","dajeeee!","piz","braaa");
 call nuovaDonazione("PREMIUM","1","30","dai dai");
