@@ -1,5 +1,18 @@
 <?php
 session_start();
+
+try {
+     $mng = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+     $bulk = new MongoDB\Driver\BulkWrite();
+     if($_POST){
+       $doc = ['_id' => new MongoDB\BSON\ObjectID(),'nome'=>$_SESSION['nome'], 'titolo'=>$_POST['titolo'], 'data'=>$_POST['data'], 'orarioPartenza'=>$_POST['orarioP'], 'orarioRitorno'=>$_POST['orarioR'], 'tragitto'=>$_POST['tragitto'], 'descrizione'=>$_POST['descrizione'], 'numeroPartecipanti'=>$_POST['nrpart'], 'azione' => 'Nuova escursione'];
+
+     $bulk->insert($doc);
+     $mng->executeBulkWrite('Naturae.nat', $bulk);
+   }
+     } catch (MongoDB\Driver\Exception\Exception $e) {
+    echo("Codice  errore".$e->getMessage()."<br>");
+	}
   
 if(isset($_POST['send_escursione'])) {
   $nome=$_SESSION['nome'];
