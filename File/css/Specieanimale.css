@@ -47,3 +47,8 @@ input[type="submit"]{
   display: block;
   margin-bottom: 20px;
 }
+input[value="Torna alla home"]{
+  position: fixed;
+  margin-left: 0;
+  margin-top: 0;
+}
